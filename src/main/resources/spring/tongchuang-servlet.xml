@@ -60,7 +60,7 @@
         <mvc:interceptor>
             <!--需要拦截的地址-->
             <mvc:mapping path="/*/*.html"/>
-            <mvc:exclude-mapping path="/userlogin/login.html"/>
+            <mvc:exclude-mapping path="/login/login.html"/>
             <bean class="com.tongchuang.interceptors.LoginInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>
