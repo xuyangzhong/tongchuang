@@ -24,4 +24,6 @@
         </property>
     </bean>
 
+    <bean id="userDao" class="com.tongchuang.dao.UserDao"></bean>
+
 </beans>
