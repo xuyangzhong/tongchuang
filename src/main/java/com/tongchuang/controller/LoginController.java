@@ -1,7 +1,8 @@
 package com.tongchuang.controller;
 
-import com.tongchuang.dao.UserDao;
 import com.tongchuang.model.UserLoginModel;
+import com.tongchuang.model.UserSessionModel;
+import com.tongchuang.service.LoginService;
 import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Controller
 @RequestMapping(value = "/login")
@@ -18,7 +21,7 @@ public class LoginController {
     public static final Logger log = LoggerFactory.getLogger(LoginController.class);
 
     @Setter
-    private UserDao userDao;
+    private LoginService loginService;
 
     private static final String PARAM_NULL_ERROR = "null_error";
 
@@ -54,11 +57,27 @@ public class LoginController {
         String pk = request.getParameter("pk").trim();
         String password = request.getParameter("password");
 
-        UserLoginModel userLoginModel = new UserLoginModel();
-        userLoginModel.setPk(pk);
-        userLoginModel.setPassword(password);
+        UserLoginModel userLoginModel = loginService.checkLoginValidity(pk,password);
 
-        return userDao.checkUserLogin(userLoginModel);
+        if(userLoginModel == null){
+            System.out.println("login fail");
+            return false;
+        }
+
+        UserSessionModel userSessionModel = new UserSessionModel();
+        userSessionModel.setPk(userLoginModel.getPk());
+        userSessionModel.setUsername(userLoginModel.getUsername());
+
+
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        userSessionModel.setLoginTime(sdf.format(date));
+        userSessionModel.setPower(userLoginModel.getPower());
+
+        request.getSession().setAttribute("userSession",userSessionModel);
+
+        System.out.println("login success");
+        return true;
     }
 
     @RequestMapping(value = "/exit")

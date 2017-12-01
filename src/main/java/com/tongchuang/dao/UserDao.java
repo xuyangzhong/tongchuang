@@ -1,17 +1,10 @@
 package com.tongchuang.dao;
 
 import com.tongchuang.model.UserLoginModel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.ibatis.annotations.Param;
+import org.mybatis.spring.annotation.MapperScan;
 
-public class UserDao {
-    private static final Logger log = LoggerFactory.getLogger(UserDao.class);
-
-    public boolean checkUserLogin(UserLoginModel userLoginModel){
-        if(userLoginModel.getPk().equals("123")&&userLoginModel.getPassword().equals("123")){
-            return true;
-        }
-        return false;
-    }
-
+@MapperScan
+public interface UserDao {
+    UserLoginModel checkUserLogin(@Param("pk") String pk, @Param("password") String password);
 }

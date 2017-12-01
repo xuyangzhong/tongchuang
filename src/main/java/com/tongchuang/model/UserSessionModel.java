@@ -7,4 +7,5 @@ public class UserSessionModel {
     private String pk;
     private String username;
     private String loginTime;
+    private int power;
 }
