@@ -23,11 +23,11 @@ public class LoginController {
     @Setter
     private LoginService loginService;
 
-    private static final String PARAM_NULL_ERROR = "null_error";
-
-    private static final String LOGIN_FAIL = "user_error";
-
-    private static final String LOGIN_SUCCESS = "success";
+//    private static final String PARAM_NULL_ERROR = "null_error";
+//
+//    private static final String LOGIN_FAIL = "user_error";
+//
+//    private static final String LOGIN_SUCCESS = "success";
 
     @RequestMapping(value = "/login")
     public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
