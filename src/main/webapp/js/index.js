@@ -8,6 +8,7 @@ function resizeCanvas() {
    // 初始化图表标签
     var myChart = echarts.init(document.getElementById('chart'));
     var option = {
+        backgroundColor: 'rgb(247,247,247)',
     title : {
         text: '校友分布图',
         x:'center'
