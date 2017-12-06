@@ -1,6 +1,7 @@
 package com.tongchuang.service;
 
 import com.tongchuang.dao.MapDao;
+import com.tongchuang.model.ProvinceDetailInfo;
 import com.tongchuang.model.ProvinceModel;
 import com.tongchuang.model.UserMapModel;
 import lombok.Setter;
@@ -34,5 +35,9 @@ public class MapService {
         }
 
         return userMapLists;
+    }
+
+    public ProvinceDetailInfo getProvinDetailInfoByProvinId(int provin_id){
+        return mapDao.loadProvinceDetailInfo(provin_id);
     }
 }
