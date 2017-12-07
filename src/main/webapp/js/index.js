@@ -55,6 +55,7 @@ function resizeCanvas() {
             type: 'map',
             mapType: 'china',
             roam: false,
+            selectedMode:'single',
             itemStyle:{
                 normal:{label:{show:true}},
                 emphasis:{label:{show:true}}
@@ -98,4 +99,8 @@ function resizeCanvas() {
         }        
     ]
 };
+myChart.on('click', function (param){
+    console.log(param.data.name);
+    window.location.replace("province.html");
+});
 myChart.setOption(option);
