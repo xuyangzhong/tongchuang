@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="favicon.ico">
+    <title>校友分布</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="container">
+
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">合工大校友网</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">首页</a></li>
+                    <li class="active"><a href="news.html">新闻</a></li>
+                    <li><a href="message.html">消息</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li ><a href="" data-toggle="modal" data-target="#mymodal">登录</a></li>
+                    <li><a href="" data-toggle="modal" data-target="#signinModel">注册</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+    </nav>
+
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <h1>每日一笑</h1>
+        <p>昨天去看牙，发现给我看牙的女医生长得挺好看的，心想：现在女孩都喜欢有钱的，一定要找机会表现出来我的实力。医生问：牙坏了，拔么？我故作紧张地问道：拔牙的话影响我开宾利么？医生：不影响，就是吹牛逼的时候有点漏风。</p>
+    </div>
+    <div class="jumbotron">
+        <h1>每日一笑</h1>
+        <p>小学三年级以前念的是蒙汉分班的学校，民族斗争非常激烈。课间摔起跤来汉族班都是靠我撑着才不会全军覆没。转学的时候填户口才知道自己其实是蒙古族，那是一个夏日午后，十岁的我体会了契丹人萧峰的痛。</p>
+    </div>
+    <div class="jumbotron">
+        <h1>每日一笑</h1>
+        <p>今天跟老妈去买菜，走到一摊位前，看一种不认识的菜，我就问大爷这是韭菜吗？大爷：喵。我说：这是韭菜吗！大爷：喵。我寻思这也太吓人了。拖着我妈就走了。回来的时候我跟我妈说这事，我妈说：哦，那是韭菜苗.....</p>
+    </div>
+
+
+</div>
+<div class="modal" id="mymodal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">请按提示输入</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-signin">
+                    <label  class="sr-only">学号</label>
+                    <input type="pk" id="userpk" name="userpk" class="form-control" placeholder="学号" required autofocus>
+                    <label class="sr-only">密码</label>
+                    <input type="password" id="userpassword" name="userpassword" class="form-control" placeholder="密码" required>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="remember-me"> 记住密码
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-lg btn-primary btn-block" type="submit" id="signup" data-dismiss="modal">登录</button>
+                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">保存</button> -->
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="modal" id="signinModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">请按提示输入</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-modal">
+                    <label  class="sr-only">学号</label>
+                    <input type="pk" id="pk" name="pk" class="form-control" placeholder="学号" required autofocus>
+                    <label  class="sr-only">密码</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="密码" required>
+                    <label  class="sr-only">重复密码</label>
+                    <input type="password" id="password2" name="password2" class="form-control" placeholder="重复密码" required>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="remember-me"> 记住密码
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-lg btn-primary btn-block" type="submit" id="signin" data-dismiss="modal">登录</button>
+                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">保存</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/echarts.js"></script>
+</body>
+</html>
