@@ -49,7 +49,7 @@ public class MapService {
         ArrayList<String> normalImgUrls = new ArrayList<String>();
         String imgUrl;
         for(ProvinceImgModel imgModel : provinceImgs){
-            imgUrl = "img"+"_"+provin_id+"_"+imgModel.getId()+imgModel.getSuffix();
+            imgUrl = "img"+"_"+provin_id+"_"+imgModel.getId()+"."+imgModel.getSuffix();
             if(imgModel.getType() == 0){
                 slideImgNum++;
                 slideImgUrls.add(imgUrl);
