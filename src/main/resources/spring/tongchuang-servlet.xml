@@ -18,6 +18,7 @@
     <!-- 注解驱动 -->
     <mvc:annotation-driven/>
 
+
     <!--静态资源不做处理-->
     <!-- 资源管理 -->
     <!--<mvc:resources mapping="/imgs/**" location="/imgs/"/>-->
@@ -44,7 +45,7 @@
         <!--数字函数名称-->
         <property name="numberToolAttribute" value="number"/>
 
-        <property name="toolboxConfigLocation" value="WEB-INF/toolbox.xml"/>
+        <!--<property name="toolboxConfigLocation" value="classpath:velocity/toolbox.xml"/>-->
 
         <property name="contentType" value="text/html;charset=UTF-8"/>
         <!--是否使用spring对宏定义的支持-->
@@ -65,23 +66,5 @@
             <bean class="com.tongchuang.interceptors.LoginInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>
-
-    <!-- 返回json -->
-    <!--<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">-->
-    <!--<property name="messageConverters">-->
-    <!--<list>-->
-    <!--<ref bean="mappingJacksonHttpMessageConverter"/>-->
-    <!--</list>-->
-    <!--</property>-->
-    <!--</bean>-->
-    <!--<bean id="mappingJacksonHttpMessageConverter"-->
-    <!--class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">-->
-    <!--<property name="supportedMediaTypes">-->
-    <!--<list>-->
-    <!--<value>text/plain;charset=UTF-8</value>-->
-    <!--<value>application/json;charset=UTF-8</value>-->
-    <!--</list>-->
-    <!--</property>-->
-    <!--</bean>-->
 
 </beans>

@@ -7,4 +7,8 @@
     <select id="checkUserLogin" resultType="com.tongchuang.model.UserLoginModel">
       select * from user_login where pk=#{pk} and password=#{password}
     </select>
+
+    <select id="loadUserInfo" resultType="com.tongchuang.model.UserInfoModel">
+      SELECT user_info.id,user_info.pk,username,sex,power,profile_pic,introduce from user_info left join user_login on user_info.pk = user_login.pk where user_info.pk = #{pk};
+    </select>
 </mapper>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<table>
+    <tr>
+        <td>id</td>
+        <td>${userinfo.id}</td>
+    </tr>
+    <tr>
+        <td>pk</td>
+        <td>${userinfo.pk}</td>
+    </tr>
+    <tr>
+        <td>username</td>
+        <td>${userinfo.username}</td>
+    </tr>
+    <tr>
+        <td>sex</td>
+        <td>${userinfo.sex}</td>
+    </tr>
+    <tr>
+        <td>power</td>
+        <td>${userinfo.power}</td>
+    </tr>
+    <tr>
+        <td>profile_pic</td>
+        <td>${userinfo.profile_pic}</td>
+    </tr>
+    <tr>
+        <td>introduce</td>
+        <td>${userinfo.introduce}</td>
+    </tr>
+</table>
+</body>
+</html>
