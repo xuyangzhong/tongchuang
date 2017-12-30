@@ -7,5 +7,5 @@ public class ProvinceImgModel {
     private int id;
     private int provin_id;
     private int type;
-    private int suffix;
+    private String suffix;
 }
