@@ -46,8 +46,7 @@ public class LoginController {
     @RequestMapping(value = "/test")
     public ModelAndView test(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
-        mav.addObject("city", "test");
-        mav.setViewName("hello");
+        mav.setViewName("test");
         return mav;
     }
 

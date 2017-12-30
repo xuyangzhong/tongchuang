@@ -27,7 +27,7 @@
 
     <!--velocity config-->
     <bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-        <property name="resourceLoaderPath" value="WEB-INF/views/"/><!-- 模板存放的路径 -->
+        <property name="resourceLoaderPath" value="WEB-INF/view/"/><!-- 模板存放的路径 -->
         <property name="velocityProperties">
             <props>
                 <prop key="input.encoding">UTF-8</prop>
@@ -71,4 +71,5 @@
     <!--service-->
     <bean id="loginService" class="com.tongchuang.service.LoginService"></bean>
     <bean id="mapService" class="com.tongchuang.service.MapService"></bean>
+    <bean id="userService" class="com.tongchuang.service.UserService"></bean>
 </beans>
