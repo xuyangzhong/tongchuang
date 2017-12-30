@@ -1,9 +1,7 @@
 package com.tongchuang.service;
 
 import com.tongchuang.dao.MapDao;
-import com.tongchuang.model.ProvinceDetailInfo;
-import com.tongchuang.model.ProvinceModel;
-import com.tongchuang.model.UserMapModel;
+import com.tongchuang.model.*;
 import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,4 +38,36 @@ public class MapService {
     public ProvinceDetailInfo getProvinDetailInfoByProvinId(int provin_id){
         return mapDao.loadProvinceDetailInfo(provin_id);
     }
+
+    public ProvinceImgUrlsModel getProvinceImgUrlsByProvinceId(int provin_id){
+        ArrayList<ProvinceImgModel> provinceImgs = mapDao.loadProvinceImgByProvinceId(provin_id);
+        ProvinceImgUrlsModel imgUrls = new ProvinceImgUrlsModel();
+        imgUrls.setProvin_id(provin_id);
+        int slideImgNum = 0;
+        int normalImgNum = 0;
+        ArrayList<String> slideImgUrls = new ArrayList<String>();
+        ArrayList<String> normalImgUrls = new ArrayList<String>();
+        String imgUrl;
+        for(ProvinceImgModel imgModel : provinceImgs){
+            imgUrl = "img"+"_"+provin_id+"_"+imgModel.getId()+imgModel.getSuffix();
+            if(imgModel.getType() == 0){
+                slideImgNum++;
+                slideImgUrls.add(imgUrl);
+            }else{
+                normalImgNum++;
+                normalImgUrls.add(imgUrl);
+            }
+        }
+        imgUrls.setNormalImgNum(normalImgNum);
+        imgUrls.setNormalImgUrls(normalImgUrls);
+        imgUrls.setSlideImgNum(slideImgNum);
+        imgUrls.setSlideImgUrls(slideImgUrls);
+        return imgUrls;
+    }
 }
+
+
+
+
+
+

@@ -1,6 +1,7 @@
 package com.tongchuang.controller;
 
 import com.tongchuang.model.ProvinceDetailInfo;
+import com.tongchuang.model.ProvinceImgUrlsModel;
 import com.tongchuang.model.UserMapModel;
 import com.tongchuang.service.MapService;
 import lombok.Setter;
@@ -35,5 +36,13 @@ public class MapController {
         int provin_id = Integer.valueOf(request.getParameter("provin_id"));
         ProvinceDetailInfo provinceDetailInfo = mapService.getProvinDetailInfoByProvinId(provin_id);
         return provinceDetailInfo;
+    }
+
+    @RequestMapping(value = "/provin_imgs")
+    @ResponseBody
+    public ProvinceImgUrlsModel getProvinceImgs(HttpServletRequest request, HttpServletResponse response){
+        int provin_id = Integer.valueOf(request.getParameter("provin_id"));
+        ProvinceImgUrlsModel provinceImgUrlsModel = mapService.getProvinceImgUrlsByProvinceId(provin_id);
+        return provinceImgUrlsModel;
     }
 }

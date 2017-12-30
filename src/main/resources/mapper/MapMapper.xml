@@ -16,4 +16,7 @@
         select province_detail.id,province_detail.provin_id,provin_name,introduce,scenic from province_detail left join province on province.provin_id = province_detail.provin_id where province_detail.provin_id=#{provin_id};
     </select>
 
+    <select id="loadProvinceImgByProvinceId" resultType="com.tongchuang.model.ProvinceImgModel">
+        SELECT * FROM province_imgs where provin_id = #{provin_id};
+    </select>
 </mapper>
