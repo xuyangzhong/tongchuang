@@ -15,4 +15,9 @@ public interface MapDao {
     ProvinceDetailInfo loadProvinceDetailInfo(@Param("provin_id")int provin_id);
 
     ArrayList<ProvinceImgModel> loadProvinceImgByProvinceId(@Param("provin_id") int provin_id) ;
+
+    int hasProvinceInfo(@Param("provin_id") int provin_id);
+
+    int saveOrUpdateProvinceInfo(@Param("provin_id") int provin_id,@Param("introduce") String introduce,@Param("scenic") String scenic);
+
 }

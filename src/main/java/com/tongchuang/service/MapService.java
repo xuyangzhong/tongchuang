@@ -35,11 +35,11 @@ public class MapService {
         return userMapLists;
     }
 
-    public ProvinceDetailInfo getProvinDetailInfoByProvinId(int provin_id){
+    public ProvinceDetailInfo getProvinDetailInfoByProvinId(int provin_id) {
         return mapDao.loadProvinceDetailInfo(provin_id);
     }
 
-    public ProvinceImgUrlsModel getProvinceImgUrlsByProvinceId(int provin_id){
+    public ProvinceImgUrlsModel getProvinceImgUrlsByProvinceId(int provin_id) {
         ArrayList<ProvinceImgModel> provinceImgs = mapDao.loadProvinceImgByProvinceId(provin_id);
         ProvinceImgUrlsModel imgUrls = new ProvinceImgUrlsModel();
         imgUrls.setProvin_id(provin_id);
@@ -48,12 +48,12 @@ public class MapService {
         ArrayList<String> slideImgUrls = new ArrayList<String>();
         ArrayList<String> normalImgUrls = new ArrayList<String>();
         String imgUrl;
-        for(ProvinceImgModel imgModel : provinceImgs){
-            imgUrl = "img"+"_"+provin_id+"_"+imgModel.getId()+"."+imgModel.getSuffix();
-            if(imgModel.getType() == 0){
+        for (ProvinceImgModel imgModel : provinceImgs) {
+            imgUrl = "img" + "_" + provin_id + "_" + imgModel.getId() + "." + imgModel.getSuffix();
+            if (imgModel.getType() == 0) {
                 slideImgNum++;
                 slideImgUrls.add(imgUrl);
-            }else{
+            } else {
                 normalImgNum++;
                 normalImgUrls.add(imgUrl);
             }
@@ -64,8 +64,17 @@ public class MapService {
         imgUrls.setSlideImgUrls(slideImgUrls);
         return imgUrls;
     }
-}
 
+    public boolean updateProvinceInfo(ProvinceDetailInfo provinceDetailInfo) {
+        int result;
+        result = mapDao.saveOrUpdateProvinceInfo(provinceDetailInfo.getProvin_id(), provinceDetailInfo.getIntroduce(), provinceDetailInfo.getScenic());
+        if (result == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+}
 
 
 

@@ -19,4 +19,16 @@
     <select id="loadProvinceImgByProvinceId" resultType="com.tongchuang.model.ProvinceImgModel">
         SELECT * FROM province_imgs where provin_id = #{provin_id};
     </select>
+
+    <insert id="saveOrUpdateProvinceInfo">
+        <selectKey keyProperty="count" resultType="int" order="BEFORE">
+            select count(*) from province_detail where provin_id = #{provin_id};
+        </selectKey>
+        <if test="count > 0">
+            update province_detail set introduce = #{introduce} , scenic = #{scenic} where provin_id = #{provin_id};
+        </if>
+        <if test="count == 0">
+            insert into province_detail (provin_id, introduce, scenic) VALUES (#{provin_id},#{introduce},#{scenic})
+        </if>
+    </insert>
 </mapper>
