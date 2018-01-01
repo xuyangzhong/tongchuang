@@ -45,4 +45,18 @@ public class MapController {
         ProvinceImgUrlsModel provinceImgUrlsModel = mapService.getProvinceImgUrlsByProvinceId(provin_id);
         return provinceImgUrlsModel;
     }
+
+    @RequestMapping(value = "/change_province_info")
+    @ResponseBody
+    public boolean changeProvinceInfo(HttpServletRequest request, HttpServletResponse response){
+        int provin_id = Integer.valueOf(request.getParameter("provin_id"));
+        String introduce = request.getParameter("introduce");
+        String scenic = request.getParameter("scenic");
+        ProvinceDetailInfo provinceDetailInfo = new ProvinceDetailInfo();
+        provinceDetailInfo.setProvin_id(provin_id);
+        provinceDetailInfo.setIntroduce(introduce);
+        provinceDetailInfo.setScenic(scenic);
+
+        return mapService.updateProvinceInfo(provinceDetailInfo);
+    }
 }
