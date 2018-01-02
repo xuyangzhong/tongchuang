@@ -1,0 +1,160 @@
+	<!DOCTYPE html>
+	<html lang="zh-CN">
+	  <head>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <link rel="icon" href="favicon.ico">
+	    <title>合肥工业大学校友网</title>
+
+	    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+	  </head>
+	  <body>
+	  <div class="container">
+
+	      <!-- Static navbar -->
+	      <nav class="navbar navbar-default navbar-fixed-top">
+	        <div class="container-fluid">
+	          <div class="navbar-header">
+	            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	              <span class="sr-only">Toggle navigation</span>
+	              <span class="icon-bar"></span>
+	              <span class="icon-bar"></span>
+	              <span class="icon-bar"></span>
+	            </button>
+	            <a class="navbar-brand" href="index.html">合工大校友网</a>
+	          </div>
+	          <div id="navbar" class="navbar-collapse collapse">
+	            <ul class="nav navbar-nav ">
+	              <li class="active"><a href="map.html">首页</a></li>
+	              <li><a href="news.html">新闻</a></li>
+	              <li><a href="message.html">消息</a></li>
+	            </ul>
+	            <ul class="nav navbar-nav navbar-right">
+	              <li><a href="user.html">userName</a></li>
+	            </ul>
+	          </div><!--/.nav-collapse -->
+	        </div><!--/.container-fluid -->
+	      </nav>
+
+	      <!-- Main component for a primary marketing message or call to action -->
+		<div class="jumbotron">
+			<form class=""><h3 class="">性别：</h3><div class=""><div><span class="">男</span><button class="" type="button" data-toggle="modal" data-target="#sexmodal">修改</button></div></div></form>
+
+			<form class=""><h3 class="">个性签名：</h3><div class=""><div><span class="">风一样的男子</span><button class="" type="button" data-toggle="modal" data-target="#autographmodal">修改</button></div></div></form>
+
+			<form class=""><h3 class="">居住地：</h3><div class=""><div><span class="">北京</span><button class="" type="button" data-toggle="modal" data-target="#domicilemodal">修改</button></div></div></form>
+
+			<form class=""><h3 class="">所在行业：</h3><div class=""><div><span class="">互联网</span><button class="" type="button" data-toggle="modal" data-target="#industrymodal">修改</button></div></div></form>
+
+			<form class=""><h3 class="">个人简介：</h3><div class=""><div><span class="">爱过！先救我妈！我保大的！约！</span><button class="" type="button" data-toggle="modal" data-target="#introducemodal">修改</button></div></div></form>
+
+	    </div>
+	    <div class="modal" id="sexmodal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title">请按提示操作</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-signin">
+            <label >性别:</label>
+            <label ><input name="sex" type="radio" value="" />男 </label> 
+			<label><input name="sex" type="radio" value="" />女 </label> 
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-lg btn-primary btn-block" type="submit" id="signup" data-dismiss="modal">确定修改</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <div class="modal" id="autographmodal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title">请按提示操作</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-signin">
+            <label >个性签名:</label>
+             <input type="" id="autograph" name="autograph" class="form-control" placeholder="风一样的男子" required autofocus>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-lg btn-primary btn-block" type="submit" id="signup" data-dismiss="modal">确定修改</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+    <div class="modal" id="domicilemodal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title">请按提示操作</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-signin">
+            <label >居住地:</label>
+             <input type="" id="domicile" name="domicile" class="form-control" placeholder="北京" required autofocus>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-lg btn-primary btn-block" type="submit" id="signup" data-dismiss="modal">确定修改</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+   <div class="modal" id="industrymodal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title">请按提示操作</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-signin">
+            <label >所在行业:</label>
+             <input type="" id="industry" name="industry" class="form-control" placeholder="互联网" required autofocus>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-lg btn-primary btn-block" type="submit" id="signup" data-dismiss="modal">确定修改</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+   <div class="modal" id="introducemodal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title">请按提示操作</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-signin">
+            <label >个人简介:</label>
+             <input type="" id="introduce" name="introduce" class="form-control" placeholder="爱过！先救我妈！我保大的！约！" required autofocus>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-lg btn-primary btn-block" type="submit" id="signup" data-dismiss="modal">确定修改</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+	  <script src="js/indexCanvas.js"></script>
+	  <script src="js/echarts.js"></script>
+	  <script src="js/index.js"></script>
+	  <script src="js/jquery.min.js"></script>
+	  <script src="js/bootstrap.js"></script>
+	  </body>
+	</html>
