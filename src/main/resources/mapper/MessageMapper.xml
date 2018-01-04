@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tongchuang.dao.NewsDao">
+    <select id="getAllNews" resultType="com.tongchuang.model.NewsModel">
+      select * from news;
+    </select>
+    <select id="loadZanPksByNewsId" resultType="com.tongchuang.model.ZanModel">
+      select * from zan where news_id = #{news_id};
+    </select>
+    <select id="loadRevertsByNewsId" resultType="com.tongchuang.model.RevertModel">
+      select * from revert where news_id = #{news_id};
+    </select>
+    <insert id="addZan">
+      insert into zan (news_id,owner_pk) values(#{news_id},#{owner_pk});
+    </insert>
+    <select id="hasZan" resultType="com.tongchuang.model.ZanModel">
+      select * from zan where news_id = #{news_id} and owner_pk = #{owner_pk};
+    </select>
+    <delete id="deleteZan">
+      delete from zan where id = #{id};
+    </delete>
+</mapper>

@@ -1,0 +1,27 @@
+package com.tongchuang.dao;
+
+import com.tongchuang.model.NewsModel;
+import com.tongchuang.model.RevertModel;
+import com.tongchuang.model.ZanModel;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.ArrayList;
+
+/**
+ * @Description:
+ * @Author: Yeliang
+ * @Date: Create in 17:25 2018/1/2
+ */
+public interface NewsDao {
+    ArrayList<NewsModel> getAllNews();
+
+    ArrayList<ZanModel> loadZanPksByNewsId(@Param("news_id")int news_id);
+
+    ArrayList<RevertModel> loadRevertsByNewsId(@Param("news_id")int news_id);
+
+    int addZan(@Param("news_id")int news_id,@Param("owner_pk")String owner_pk);
+
+    ZanModel hasZan(@Param("news_id")int news_id,@Param("owner_pk")String owner_pk);
+
+    int deleteZan(@Param("id")int zan_id);
+}

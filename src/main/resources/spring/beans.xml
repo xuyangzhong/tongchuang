@@ -62,6 +62,10 @@
         <property name="mapperInterface" value="com.tongchuang.dao.MapDao"></property>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
     </bean>
+    <bean id="newsDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.tongchuang.dao.NewsDao"></property>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+    </bean>
 
     <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -72,4 +76,5 @@
     <bean id="loginService" class="com.tongchuang.service.LoginService"></bean>
     <bean id="mapService" class="com.tongchuang.service.MapService"></bean>
     <bean id="userService" class="com.tongchuang.service.UserService"></bean>
+    <bean id="newsService" class="com.tongchuang.service.NewsService"></bean>
 </beans>

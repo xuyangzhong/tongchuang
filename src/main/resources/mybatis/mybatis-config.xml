@@ -8,6 +8,7 @@
     <mappers>
         <mapper resource="mapper/UserMapper.xml"></mapper>
         <mapper resource="mapper/MapMapper.xml"></mapper>
+        <mapper resource="mapper/MessageMapper.xml"></mapper>
     </mappers>
 
 </configuration>

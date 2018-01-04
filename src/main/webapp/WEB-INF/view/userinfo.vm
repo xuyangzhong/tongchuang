@@ -32,6 +32,10 @@
         <td>introduce</td>
         <td>${userinfo.introduce}</td>
     </tr>
+    <tr>
+        <td>industry</td>
+        <td>${userinfo.industry}</td>
+    </tr>
 </table>
 </body>
 </html>

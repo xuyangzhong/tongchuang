@@ -11,4 +11,5 @@ public class UserInfoModel {
     private int power;
     private String profile_pic;
     private String introduce;
+    private String industry;
 }
