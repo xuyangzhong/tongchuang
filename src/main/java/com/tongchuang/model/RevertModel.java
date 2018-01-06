@@ -19,4 +19,5 @@ public class RevertModel {
     private Timestamp revertTime;
     private String senderPK;
     private String receivePK;
+    private int isdelete;
 }

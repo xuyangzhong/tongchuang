@@ -5,6 +5,7 @@ import com.tongchuang.model.RevertModel;
 import com.tongchuang.model.ZanModel;
 import org.apache.ibatis.annotations.Param;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -24,4 +25,14 @@ public interface NewsDao {
     ZanModel hasZan(@Param("news_id")int news_id,@Param("owner_pk")String owner_pk);
 
     int deleteZan(@Param("id")int zan_id);
+
+    int addRevert(@Param("news_id")int news_id, @Param("content")String content, @Param("parent_root")int parent_root,
+                  @Param("revert_id")int revert_id, @Param("revertTime")Timestamp revertTime, @Param("senderPK")String senderPK,
+                  @Param("receivePK")String receivePK);
+
+    RevertModel hasRevert(@Param("id")int revert_id);
+
+    int deleteRevert(@Param("id")int revert_id);
+
+    ArrayList<RevertModel> loadRevertsByRevertId(@Param("revert_id")int revert_id);
 }

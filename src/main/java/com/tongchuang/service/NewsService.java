@@ -57,11 +57,11 @@ public class NewsService {
             //获取评论的用户信息
             ArrayList<UserInfoModel> revertOwners = new ArrayList<UserInfoModel>();
             UserInfoModel revertOwner;
-            for(RevertModel revert : reverts){
+            for (RevertModel revert : reverts) {
                 revertOwner = userDao.loadUserInfo(revert.getSenderPK());
                 revertOwners.add(revertOwner);
                 //若不是一级评论
-                if(revert.getReceivePK()!=null){
+                if (revert.getReceivePK() != null) {
                     revertOwner = userDao.loadUserInfo(revert.getReceivePK());
                     revertOwners.add(revertOwner);
                 }
@@ -73,18 +73,54 @@ public class NewsService {
         return newsShowLists;
     }
 
-    public boolean doZan(ZanModel zan){
-        int count = newsDao.addZan(zan.getNews_id(),zan.getOwner_pk());
-        return count != 0 ? true : false;
+    public void doZan(ZanModel zan) {
+        ZanModel tempZan = newsDao.hasZan(zan.getNews_id(), zan.getOwner_pk());
+        if (tempZan != null) {
+            log.error(String.format("the zan is existent , news_id is %d and owner_pk is %s", zan.getNews_id(), zan.getOwner_pk()));
+            return;
+        }
+        newsDao.addZan(zan.getNews_id(), zan.getOwner_pk());
+        log.info(String.format("the pk %s do zan , news_id is %d", zan.getOwner_pk(), zan.getNews_id()));
     }
 
-    public boolean undoZan(ZanModel zan){
-        ZanModel tempZan = newsDao.hasZan(zan.getNews_id(),zan.getOwner_pk());
-        if(tempZan == null){
-            log.error(String.format("the zan is non-existent , news_id is %s and owner_pk is %d",zan.getNews_id(),zan.getOwner_pk()));
-            return false;
+    public void undoZan(ZanModel zan) {
+        ZanModel tempZan = newsDao.hasZan(zan.getNews_id(), zan.getOwner_pk());
+        if (tempZan == null) {
+            log.error(String.format("the zan is non-existent , news_id is %d and owner_pk is %s", zan.getNews_id(), zan.getOwner_pk()));
+            return;
         }
-        int count = newsDao.deleteZan(tempZan.getId());
-        return count != 0 ? true : false;
+        newsDao.deleteZan(tempZan.getId());
+        log.info(String.format("the pk %s undo zan , news_id is %d", zan.getOwner_pk(), zan.getNews_id()));
+    }
+
+    public void addRevert(RevertModel revert) {
+        newsDao.addRevert(revert.getNews_id(), revert.getContent(),
+                revert.getParent_root(), revert.getRevert_id(),
+                revert.getRevertTime(), revert.getSenderPK(),
+                revert.getReceivePK());
+        log.info(String.format("the pk %s revert , news_id is %d", revert.getSenderPK(), revert.getNews_id()));
+    }
+
+    public void deleteRevert(int revert_id) {
+        RevertModel revert = newsDao.hasRevert(revert_id);
+        if (revert == null) {
+            log.error(String.format("the revert is non-existent , revert_id is %d", revert.getId()));
+            return;
+        }
+        newsDao.deleteRevert(revert_id);
+        log.info(String.format("delete the pk %s revert successly, revert_id is %d", revert.getSenderPK(), revert_id));
+
+        cascadeDelete(revert_id);
+    }
+
+    //级联删除评论的评论
+    private void cascadeDelete(int revert_id) {
+        ArrayList<RevertModel> reverts = newsDao.loadRevertsByRevertId(revert_id);
+        if (reverts == null)
+            return;
+        for (RevertModel revert : reverts){
+            newsDao.deleteRevert(revert.getId());
+            cascadeDelete(revert.getId());
+        }
     }
 }

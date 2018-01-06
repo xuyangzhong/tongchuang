@@ -8,7 +8,7 @@
       select * from zan where news_id = #{news_id};
     </select>
     <select id="loadRevertsByNewsId" resultType="com.tongchuang.model.RevertModel">
-      select * from revert where news_id = #{news_id};
+      select * from revert where news_id = #{news_id} and isdelete = 0;
     </select>
     <insert id="addZan">
       insert into zan (news_id,owner_pk) values(#{news_id},#{owner_pk});
@@ -19,4 +19,16 @@
     <delete id="deleteZan">
       delete from zan where id = #{id};
     </delete>
+    <insert id="addRevert">
+      insert into revert(news_id,content,parent_root,revert_id,revertTime,senderPK,receivePK,isdelete) values (#{news_id},#{content},#{parent_root},#{revert_id},#{revertTime},#{senderPK},#{receivePK},0);
+    </insert>
+    <select id="hasRevert" resultType="com.tongchuang.model.RevertModel">
+      select * from revert where id = #{id} and isdelete = 0;
+    </select>
+    <update id="deleteRevert">
+      update revert set isdelete = 1 where id = #{id};
+    </update>
+    <select id="loadRevertsByRevertId" resultType="com.tongchuang.model.RevertModel">
+      select * from revert where revert_id = #{revert_id} and isdelete = 0;
+    </select>
 </mapper>
