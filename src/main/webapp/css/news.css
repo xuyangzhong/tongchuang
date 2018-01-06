@@ -1,0 +1,26 @@
+body {
+    background-color: #ebebeb;
+}
+
+.post {
+    background-color: white;
+    padding: 35px;
+    margin-bottom: 35px;
+}
+
+.post-head {
+    text-align: center;
+}
+
+.post-title {
+    font-size: 2.5em;
+}
+
+.post-meta {
+    margin-top: 14px;
+}
+
+.post-content {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
