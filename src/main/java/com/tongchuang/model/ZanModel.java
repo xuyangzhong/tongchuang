@@ -12,4 +12,5 @@ public class ZanModel {
     private int id;
     private int news_id;
     private String owner_pk;
+    private int isdelete;
 }

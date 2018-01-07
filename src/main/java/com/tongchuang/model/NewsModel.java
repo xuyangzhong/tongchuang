@@ -18,4 +18,5 @@ public class NewsModel {
     private int zan_num;
     private Timestamp createTime;
     private String owner_pk;
+    private int isdelete;
 }

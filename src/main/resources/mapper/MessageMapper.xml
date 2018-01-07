@@ -2,32 +2,54 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tongchuang.dao.NewsDao">
     <select id="getAllNews" resultType="com.tongchuang.model.NewsModel">
-      select * from news;
+      select * from news where isdelete = 0;
     </select>
+
     <select id="loadZanPksByNewsId" resultType="com.tongchuang.model.ZanModel">
-      select * from zan where news_id = #{news_id};
+      select * from zan where news_id = #{news_id} and isdelete = 0;
     </select>
+
     <select id="loadRevertsByNewsId" resultType="com.tongchuang.model.RevertModel">
       select * from revert where news_id = #{news_id} and isdelete = 0;
     </select>
-    <insert id="addZan">
-      insert into zan (news_id,owner_pk) values(#{news_id},#{owner_pk});
-    </insert>
-    <select id="hasZan" resultType="com.tongchuang.model.ZanModel">
-      select * from zan where news_id = #{news_id} and owner_pk = #{owner_pk};
+
+    <select id="loadNewsByNewsId" resultType="com.tongchuang.model.NewsModel">
+      select * from news where id = #{id} and isdelete = 0;
     </select>
-    <delete id="deleteZan">
-      delete from zan where id = #{id};
-    </delete>
+
+    <select id="loadRevertByRevertId" resultType="com.tongchuang.model.RevertModel">
+        select * from revert where id = #{id} and isdelete = 0;
+    </select>
+
+    <insert id="addNews">
+      insert into news(title,content,zan_num,createTime,owner_pk,isdelete) values (#{title},#{content},#{zan_num},#{createTime},#{owner_pk},0);
+    </insert>
+
+    <update id="deleteNews">
+      update news set isdelete = 1 where id=#{id};
+    </update>
+
+    <insert id="addZan">
+      insert into zan (news_id,owner_pk,isdelete) values(#{news_id},#{owner_pk},0);
+    </insert>
+
+    <select id="hasZan" resultType="com.tongchuang.model.ZanModel">
+      select * from zan where news_id = #{news_id} and owner_pk = #{owner_pk} and isdelete = 0;
+    </select>
+
+    <update id="deleteZan">
+      update zan set isdelete = 1 where id= {id};
+    </update>
+
     <insert id="addRevert">
       insert into revert(news_id,content,parent_root,revert_id,revertTime,senderPK,receivePK,isdelete) values (#{news_id},#{content},#{parent_root},#{revert_id},#{revertTime},#{senderPK},#{receivePK},0);
     </insert>
-    <select id="hasRevert" resultType="com.tongchuang.model.RevertModel">
-      select * from revert where id = #{id} and isdelete = 0;
-    </select>
+
+
     <update id="deleteRevert">
       update revert set isdelete = 1 where id = #{id};
     </update>
+
     <select id="loadRevertsByRevertId" resultType="com.tongchuang.model.RevertModel">
       select * from revert where revert_id = #{revert_id} and isdelete = 0;
     </select>

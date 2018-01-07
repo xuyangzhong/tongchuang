@@ -1,5 +1,7 @@
 package com.tongchuang.controller;
 
+import com.tongchuang.customException.NewsOperationException;
+import com.tongchuang.model.NewsModel;
 import com.tongchuang.model.NewsShowModel;
 import com.tongchuang.model.RevertModel;
 import com.tongchuang.model.ZanModel;
@@ -39,27 +41,65 @@ public class NewsController {
         return newsShowLists;
     }
 
+    @RequestMapping(value = "/publishnews")
+    @ResponseBody
+    public boolean publishNews(HttpServletRequest request, HttpServletResponse response){
+        String pk = request.getParameter("pk");
+        String title = request.getParameter("title");
+        String content = request.getParameter("content");
+        Timestamp createTime = new Timestamp(new Date().getTime());
+        int zan_num = 0;
+        NewsModel news = new NewsModel();
+        news.setTitle(title);
+        news.setContent(content);
+        news.setOwner_pk(pk);
+        news.setCreateTime(createTime);
+
+        try{
+            newsService.addNews(news);
+            return true;
+        }catch (Exception e){
+            log.error("publish news fail",e);
+            return false;
+        }
+    }
+
+    @RequestMapping(value = "/deletenews")
+    @ResponseBody
+    public boolean deleteNews(HttpServletRequest request, HttpServletResponse response){
+        int news_id = Integer.valueOf(request.getParameter("news_id"));
+        try{
+            newsService.deleteNews(news_id);
+            return true;
+        }catch (Exception e){
+            log.error("delete news fail",e);
+            return false;
+        }
+    }
+
     @RequestMapping(value = "/dozan")
     @ResponseBody
-    public boolean doZan(HttpServletRequest request, HttpServletResponse response) {
-        String owner_pk = request.getParameter("user_pk");
+    public String doZan(HttpServletRequest request, HttpServletResponse response) {
+        String pk = request.getParameter("user_pk");
         int news_id = Integer.valueOf(request.getParameter("news_id"));
         ZanModel zan = new ZanModel();
         zan.setNews_id(news_id);
-        zan.setOwner_pk(owner_pk);
+        zan.setOwner_pk(pk);
         try {
             newsService.doZan(zan);
-            return true;
+            return "true";
+        }catch (NewsOperationException e){
+            return "overdue";
         }catch(Exception e){
             log.error("doZan fail",e);
-            return false;
+            return "false";
         }
 
     }
 
     @RequestMapping(value = "/undozan")
     @ResponseBody
-    public boolean undoZan(HttpServletRequest request, HttpServletResponse response) {
+    public String undoZan(HttpServletRequest request, HttpServletResponse response) {
         String owner_pk = request.getParameter("user_pk");
         int news_id = Integer.valueOf(request.getParameter("news_id"));
         ZanModel zan = new ZanModel();
@@ -67,16 +107,18 @@ public class NewsController {
         zan.setOwner_pk(owner_pk);
         try {
             newsService.undoZan(zan);
-            return true;
+            return "true";
+        }catch (NewsOperationException e){
+            return "overdue";
         }catch(Exception e){
             log.error("undoZan fail",e);
-            return false;
+            return "false";
         }
     }
 
     @RequestMapping(value = "/doRevert")
     @ResponseBody
-    public boolean doRevert(HttpServletRequest request, HttpServletResponse response) {
+    public String doRevert(HttpServletRequest request, HttpServletResponse response) {
         int news_id = Integer.valueOf(request.getParameter("news_id"));
         String content = request.getParameter("content");
         int parent_root = Integer.valueOf(request.getParameter("parent_root"));
@@ -104,23 +146,27 @@ public class NewsController {
 
         try {
             newsService.addRevert(revert);
-            return true;
+            return "true";
+        }catch (NewsOperationException e){
+            return "overdue";
         }catch(Exception e){
             log.error("doRevert fail",e);
-            return false;
+            return "false";
         }
     }
 
     @RequestMapping(value = "/removeRevert")
     @ResponseBody
-    public boolean removeRevert(HttpServletRequest request, HttpServletResponse response){
+    public String removeRevert(HttpServletRequest request, HttpServletResponse response){
         int revert_id = Integer.valueOf(request.getParameter("revert_id"));
         try {
             newsService.deleteRevert(revert_id);
-            return true;
+            return "true";
+        }catch (NewsOperationException e){
+            return "overdue";
         }catch(Exception e){
             log.error("removeRevert fail",e);
-            return false;
+            return "false";
         }
     }
 

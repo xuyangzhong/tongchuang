@@ -20,6 +20,16 @@ public interface NewsDao {
 
     ArrayList<RevertModel> loadRevertsByNewsId(@Param("news_id")int news_id);
 
+    NewsModel loadNewsByNewsId(@Param("id")int news_id);
+
+    RevertModel loadRevertByRevertId(@Param("id")int revert_id);
+
+    int addNews(@Param("title")String title,@Param("content")String content,
+                @Param("zan_num")int zan_num,@Param("createTime")Timestamp createTime,
+                @Param("owner_pk")String owner_pk);
+
+    int deleteNews(@Param("id")int id);
+
     int addZan(@Param("news_id")int news_id,@Param("owner_pk")String owner_pk);
 
     ZanModel hasZan(@Param("news_id")int news_id,@Param("owner_pk")String owner_pk);
@@ -29,8 +39,6 @@ public interface NewsDao {
     int addRevert(@Param("news_id")int news_id, @Param("content")String content, @Param("parent_root")int parent_root,
                   @Param("revert_id")int revert_id, @Param("revertTime")Timestamp revertTime, @Param("senderPK")String senderPK,
                   @Param("receivePK")String receivePK);
-
-    RevertModel hasRevert(@Param("id")int revert_id);
 
     int deleteRevert(@Param("id")int revert_id);
 
