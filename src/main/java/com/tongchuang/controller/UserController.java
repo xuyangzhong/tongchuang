@@ -19,7 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 
 @Controller
@@ -88,17 +90,17 @@ public class UserController {
                 if (file.getSize() > maxUploadSize) {
                     return "beyond_size_limit";
                 }
-                String fileNewName = pk + "." + suffix;
-                boolean isSuccessChangeDB = false;
+                String fileNewName = pk + "-" + new Timestamp(new Date().getTime()) + "." + suffix;
+                boolean isSuccessChangeDB;
                 try {
-                    userService.changeProfilePic(pk,fileNewName);
+                    userService.changeProfilePic(pk, fileNewName);
                     isSuccessChangeDB = true;
                 } catch (Exception e) {
                     log.error("change profile pic fail", e);
                     isSuccessChangeDB = false;
                 }
 
-                if(isSuccessChangeDB == false){
+                if (isSuccessChangeDB == false) {
                     return "false";
                 }
 
