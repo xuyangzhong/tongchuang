@@ -5,10 +5,11 @@ import com.tongchuang.model.UserLoginModel;
 import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
+@Service
 public class LoginService {
-
-    public static final Logger log = LoggerFactory.getLogger(LoginService.class);
+    private static final Logger log = LoggerFactory.getLogger(LoginService.class);
 
 
     @Setter

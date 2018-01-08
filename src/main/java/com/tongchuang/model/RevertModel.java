@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @Data
 public class RevertModel {
     private int id;
-    private int news_id;
+    private int message_id;
     private String content;
     private int parent_root;
     private int revert_id;

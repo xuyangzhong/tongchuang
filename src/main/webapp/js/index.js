@@ -2,6 +2,7 @@ window.addEventListener("resize", resizeCanvas, false);
 function resizeCanvas() {
 	var  chart=document.getElementById("chart");
     chart.style.width = window.innerWidth;
+    console.log(window.innerWidth);
     chart.style.height = window.innerHeight;
 }
 

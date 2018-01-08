@@ -10,12 +10,12 @@ import java.util.ArrayList;
  * @Date: Create in 17:30 2018/1/2
  */
 @Data
-public class NewsShowModel {
-    private NewsModel news;
+public class MessageShowModel {
+    private MessageModel message;
     private ArrayList<RevertModel> reverts;
     private ArrayList<ZanModel> zans;
 
-    private UserInfoModel newsOwner;
+    private UserInfoModel messageOwner;
     private ArrayList<UserInfoModel> zanOwnerLists;
     private ArrayList<UserInfoModel> revertOwnerLists;
 }

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 @Controller
 @RequestMapping(value = "/map")
 public class MapController {
-    public static final Logger log = LoggerFactory.getLogger(MapController.class);
+    private static final Logger log = LoggerFactory.getLogger(MapController.class);
 
     @Setter
     private MapService mapService;

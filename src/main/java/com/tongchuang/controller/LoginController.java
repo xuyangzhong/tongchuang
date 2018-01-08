@@ -18,7 +18,7 @@ import java.util.Date;
 @Controller
 @RequestMapping(value = "/login")
 public class LoginController {
-    public static final Logger log = LoggerFactory.getLogger(LoginController.class);
+    private static final Logger log = LoggerFactory.getLogger(LoginController.class);
 
     @Setter
     private LoginService loginService;

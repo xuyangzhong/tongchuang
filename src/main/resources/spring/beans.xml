@@ -62,8 +62,8 @@
         <property name="mapperInterface" value="com.tongchuang.dao.MapDao"></property>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
     </bean>
-    <bean id="newsDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="mapperInterface" value="com.tongchuang.dao.NewsDao"></property>
+    <bean id="messageDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.tongchuang.dao.MessageDao"></property>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
     </bean>
 
@@ -72,9 +72,9 @@
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-    <!--service-->
-    <bean id="loginService" class="com.tongchuang.service.LoginService"></bean>
-    <bean id="mapService" class="com.tongchuang.service.MapService"></bean>
-    <bean id="userService" class="com.tongchuang.service.UserService"></bean>
-    <bean id="newsService" class="com.tongchuang.service.NewsService"></bean>
+    <!--&lt;!&ndash;service&ndash;&gt;-->
+    <!--<bean id="loginService" class="com.tongchuang.service.LoginService"></bean>-->
+    <!--<bean id="mapService" class="com.tongchuang.service.MapService"></bean>-->
+    <!--<bean id="userService" class="com.tongchuang.service.UserService"></bean>-->
+    <!--<bean id="newsService" class="com.tongchuang.service.MessageService"></bean>-->
 </beans>

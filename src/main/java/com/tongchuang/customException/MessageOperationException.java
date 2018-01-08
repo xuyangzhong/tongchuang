@@ -5,11 +5,11 @@ package com.tongchuang.customException;
  * @Author: Yeliang
  * @Date: Create in 17:55 2018/1/7
  */
-public class NewsOperationException extends RuntimeException{
-    public NewsOperationException(String message){
+public class MessageOperationException extends RuntimeException{
+    public MessageOperationException(String message){
         super(message);
     }
-    public NewsOperationException(){
+    public MessageOperationException(){
         super();
     }
 }

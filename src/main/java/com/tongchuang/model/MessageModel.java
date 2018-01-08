@@ -11,7 +11,7 @@ import java.sql.Timestamp;
  */
 
 @Data
-public class NewsModel {
+public class MessageModel {
     private int id;
     private String title;
     private String content;
