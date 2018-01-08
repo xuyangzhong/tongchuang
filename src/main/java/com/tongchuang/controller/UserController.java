@@ -2,6 +2,7 @@ package com.tongchuang.controller;
 
 import com.tongchuang.model.MessageShowModel;
 import com.tongchuang.model.UserInfoModel;
+import com.tongchuang.model.VisitShowModel;
 import com.tongchuang.service.MessageService;
 import com.tongchuang.service.UserService;
 import lombok.Setter;
@@ -48,13 +49,21 @@ public class UserController {
     }
 
     @RequestMapping(value = "/userinfo")
-    public ModelAndView getUserInfoByPK(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView getUserInfo(HttpServletRequest request, HttpServletResponse response) {
         String pk = request.getParameter("pk");
         UserInfoModel userInfo = userService.getUserInfoByPK(pk);
         ModelAndView mav = new ModelAndView();
         mav.addObject("userinfo", userInfo);
         mav.setViewName("userinfo");
         return mav;
+    }
+
+    @RequestMapping(value = "/showVisitUser")
+    @ResponseBody
+    public VisitShowModel showVisitUser(HttpServletRequest request, HttpServletResponse response){
+        String pk = request.getParameter("pk");
+        VisitShowModel visitShow = userService.getVisitInfo(pk);
+        return visitShow;
     }
 
     @RequestMapping(value = "/usermessage")
