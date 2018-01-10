@@ -1,54 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/html">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="favicon.ico">
+    <title>合肥工业大学校友网</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/news.css" rel="stylesheet">
+    <link href="/css/userinfo.css" rel="stylesheet">
 </head>
 <body>
-<table>
-    <tr>
-        <td>id</td>
-        <td>${userinfo.id}</td>
-    </tr>
-    <tr>
-        <td>pk</td>
-        <td>${userinfo.pk}</td>
-    </tr>
-    <tr>
-        <td>username</td>
-        <td>${userinfo.username}</td>
-    </tr>
-    <tr>
-        <td>sex</td>
-        <td>
-            #if(${userinfo.sex} == 1)
-                男
-            #else
-                女
-            #end
-        </td>
-    </tr>
+<!-- Static navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">合工大校友网</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav ">
+                <li class="active"><a href="map.html">首页</a></li>
+                <li><a href="news.html">新闻</a></li>
+                <li><a href="message.html">消息</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="user.html">${userinfo.username}</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>
+<div style="height:51px;margin-bottom:35px"></div>
+<div class="col-md-11">
+    <div class="col-md-3" id="userinfo-contain">
+        <div id="user-info-head">
+            <img src="/headpic/${userinfo.profile_pic}">
+            <div>
+                <p id="user-info-name">${userinfo.username}</p>
+                <p id="user-info-sex">
+                    #if(${userinfo.sex}==1)
+                        男
+                    #else
+                        女
+                    #end
+                </p>
+            </div>
+        </div>
+        <div class="list-group">
+            <div id="user-info-introduction">
+                <button type="button" class="list-group-item" id="user-info-btn" onclick="showUserIntroduction()">个人简介
+                </button>
+                <p class="list-group-item disabled" style="display: none">${userinfo.introduce}</p>
+            </div>
+            <div id="user-info-career">
+                <p class="list-group-item">职业：<span>${userinfo.industry}</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 rows" id="post-contain">
+        <div id="memo-contain">
+            <div id="write-memo">
+                <textarea class="form-control" rows="3">说点什么吧</textarea>
+            </div>
+            <div id="memo-submit" class="panel panel-heading">
+                <button type="button" class="btn btn-info" onclick="upLoadMsg()">发表</button>
+            </div>
+        </div>
+        <!-- show articles here -->
+    </div>
+</div>
 
-
-    <tr>
-        <td>sex</td>
-        <td>${userinfo.sex}</td>
-    </tr>
-    <input type="hidden" id="img_url" name="img_url">${userinfo.profile_pic}
-    <tr>
-        <td>power</td>
-        <td>${userinfo.power}</td>
-    </tr>
-    <tr>
-        <td>profile_pic</td>
-        <td>${userinfo.profile_pic}</td>
-    </tr>
-    <tr>
-        <td>introduce</td>
-        <td>${userinfo.introduce}</td>
-    </tr>
-    <tr>
-        <td>industry</td>
-        <td>${userinfo.industry}</td>
-    </tr>
-</table>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/news.js"></script>
+<script src="/js/user.js"></script>
 </body>
 </html>

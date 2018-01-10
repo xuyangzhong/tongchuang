@@ -1,4 +1,20 @@
 window.addEventListener("resize", resizeCanvas, false);
+
+function requestMapDetail() {
+    var mapDetail = $.ajax({
+        url: '/map/maplsit.do',
+        type: "POST",
+        dataType: "json",
+        success: function (res) {
+            var province, user_num, user_lists;
+            res.forEach(function (element) {
+                province = element.provinceModel;
+                user_num = element.user_num;
+                user_lists = res.user_lists;
+            });
+        }
+    });
+}
 function resizeCanvas() {
 	var  chart=document.getElementById("chart");
     chart.style.width = window.innerWidth;

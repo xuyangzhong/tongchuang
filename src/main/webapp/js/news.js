@@ -1,100 +1,208 @@
-window.addEventListener("load", getdata(), false);
+window.addEventListener("load", requestMessage(), false);
 
-var getcontent = function (news_id, content) {
-    if (content.length > 100) {
-        return content.substring(0, 100) + "<span id=\"" + "othercontent" + news_id + "\" style=\"display:none;\">" + content.substring(100) + "</span><a onclick=\"javascript:wrapcontent('" + "othercontent" + news_id + "');return false\">查看全文>></a>";
+var getName = function (pk, list) {
+    for (var i = 0; i < list.length; i++) {
+        if (pk === list[i].pk)
+            break;
+    }
+    return list[i].username;
+}
+
+var getPhoto = function (pk, list) {
+    for (var i = 0; i < list.length; i++) {
+        if (pk === list[i].pk)
+            break;
+    }
+    return list[i].profile_pic;
+}
+
+var msgGenerator = function (message_id) {//id = msgid_xxxxx;
+    $("#post-contain").append("<article class=\"post\" id = \"msgid_" +
+        message_id + "\"></article>");
+}
+
+var msgHeadGenerator = function (photo, name, time) {
+    return "<div class=\"post-head\">" +
+        "<div class=\"user-pto\">" +
+        "<img src=\"" + photo + "\"/>" +
+        "</div>" +
+        "<div class=\"user-info\">" +
+        "<p class=\"user-name\">" + name + "</p>" +
+        "<p class=\"post-date\">" + time + "</p>" +
+        "</div>" +
+        "</div>";
+}
+
+var msgContentGenerator = function (content) {
+    return "<div class=\"post-content\" >" +
+        "<p>" + content + "</p>" +
+        "</div>";
+}
+
+var msgWidgetsGenerator = function (message) {
+    var thumbUpNum = message.zan_num;
+    return "<div class=\"widgets-container\">" +
+        "<span class=\"views-count\">浏览" + thumbUpNum + "次</span>" +
+        "<img class=\"reply-button\" src=\"/icon/liuyan.png\"/>" +
+        "<img class=\"thumb-up-button\" src=\"/icon/zan.png\"/>" +
+        "</div>";
+}
+
+var msgThumbsGenerator = function (thumbsList, thumbsUperList) {
+    var str = "";
+    for (var i = 0; i < thumbsList.length; i++) {
+        if (i < thumbsList.length - 1) {
+            str = str + getName(thumbsList[i].owner_pk, thumbsUperList) + "、";
+        }
+        else {
+            str = str + getName(thumbsList[i].owner_pk, thumbsUperList) + "觉得很赞";
+        }
+    }
+    return "<div class=\"thumbs-container\">" +
+        "<div style=\"display: inline\"><img src=\"/icon/zanall.png\" /></div>" +
+        "<div class = \"thumbs-list\">" +
+        str +
+        "</div>" +
+        "</div>";
+}
+
+var msgCommentsGenerator = function (commentsList, commentsPosterList) {
+    var compare = function (x, y) {
+        console.log("x=" + x + "    " + "y=" + y + "\n");
+        if (x.parent_root === y.parent_root) {
+            if (x.parent_root === 0) {
+                return (x.revertTime > y.revertTime) ? true : false;
+            }
+            else {
+                return (x.revert_id > y.revert_id) ? true : false;
+            }
+        }
+        else if (x.parent_root > y.parent_root) {
+            return (x.revert_id >= y.id) ? true : false;
+        }
+        else {
+            return (y.revert_id >= x.id) ? false : true;
+        }
+    };
+    var html = "<div class=\"comments-container\">";
+    var photo, sender_name, receiver_name, content, date;
+    commentsList.sort(compare);
+    commentsList.forEach(function (element, index) {
+        console.log(element.content + "\n");
+        if (element.parent_root === 0) {
+            photo = "/headpic/" + getPhoto(element.senderPK, commentsPosterList);
+            sender_name = getName(element.senderPK, commentsPosterList);
+            content = element.content;
+            date = new Date(element.revertTime);
+            date = (date.getMonth() + 1) + "-" + date.getDay();
+            html = html + "<div class=\"comment parent\">" +
+                "<div class=\"comment-poster-pto\">" +
+                "<img src=\"" + photo + "\"/>" +
+                "</div>" +
+                "<div class=\"comment-post\">" +
+                "<span class=\"comment-sender-name\">" + sender_name + "</span>:" + "<span>" + content + "</span>" +
+                "<p class=\"comment-post-time\">" + date + "</p>" +
+                "</div>" +
+                "</div>";
+        }
+        else {
+            photo = "/headpic/" + getPhoto(element.senderPK, commentsPosterList);
+            sender_name = getName(element.senderPK, commentsPosterList);
+            receiver_name = getName(element.receivePK, commentsPosterList);
+            content = element.content;
+            date = new Date(element.revertTime);
+            date = (date.getMonth() + 1) + "-" + date.getDay();
+            html = html + "<div class=\"comment child\">" +
+                "<div class=\"comment-poster-pto\">" +
+                "<img src=\"" + photo + "\"/>" +
+                "</div>" +
+                "<div class=\"comment-post\">" +
+                "<span class=\"comment-sender-name\">" + sender_name + "</span>回复<span class=\"comment-receiver-name\">" + receiver_name + "</span>:&nbsp;&nbsp;" + "<span>" + content + "</span>" +
+                "<p class=\"comment-post-time\">" + date + "</p>" +
+                "</div>" +
+                "</div>";
+        }
+    });
+    html = html + "</div>";
+    return html;
+}
+
+var msgFootGenerator = function (message, commentsList, thumbsList, msgPoster, thumbsUperList, commentsPosterList) {
+    return "<div class=\"post-foot\">" +
+        msgWidgetsGenerator(message) +
+        msgThumbsGenerator(thumbsList, thumbsUperList) +
+        msgCommentsGenerator(commentsList, commentsPosterList) +
+        "</div>";
+}
+
+var msgContentWrapper = function (message_id, content) {
+    if (content.length > 150) {
+        return content.substring(0, 150) + "<span id=\"" +
+            "othercontent" + message_id +
+            "\" style=\"display:none;\">" +
+            content.substring(100) +
+            "</span><a onclick=\"javascript:wrapMsgcontent('" +
+            "othercontent" + news_id +
+            "');return false\">查看全文>></a>";
     }
     else {
         return content;
     }
 }
 
-var gethtml = function (id, title, author, createTime, content, zanNum, revertsNum) {
-    return "<article class=\"post\" id=\"" + id + "\"> <div class=\"post-head\"> <h1 class=\"post-title\">" + title + "</h1> <div class=\"post-meta\"> <span class=\"author\">作者：" + author + "</span> &nbsp;&nbsp;<time class=\"post-date\"> " + createTime + "</time> </div> </div> <div class=\"post-content\"> <p> " + getcontent(id, content) + "</p> </div> <hr style=\"height:1px;border:none;border-top:1px solid #ebebeb;\"/> <div class=\"post-stats\"> <span class=\"post-votes\">" + zanNum + "</span>&nbsp;赞&nbsp;-&nbsp; <span class=\"post-view\">" + revertsNum + "</span>&nbsp;浏览 </div> <div class=\"post-votes\"> <button type=\"button\" class=\"btn btn-default btn-sm\"> <span class=\"glyphicon glyphicon-thumbs-up\"></span> </button> <button type=\"button\" class=\"btn btn-default btn-sm\"> <span class=\"glyphicon glyphicon-thumbs-down\"></span> </button> </div><div class = \"post-reverts\"></div> </article>"
-}
-
-var getrevert = function (id, parent_root, sender_name, receive_name, content) {
-    if (parent_root === 0) {
-        return "<p class=\"parent\" id=\"" + "reverts" + id + "\">" + sender_name + ":&nbsp;&nbsp;" + content + "</p>";
+var wrapMsgContent = function (wrapedId) {
+    if (document.getElementById(wrapedId).style.display === "none") {
+        document.getElementById(wrapedId).style.display = "";
     }
     else {
-        return "<p class=\"child\" id=\"" + "reverts" + id + "\">" + sender_name + "&nbsp;" + "回复" + receive_name + ":&nbsp;&nbsp;" + content + "</p>";
+        document.getElementById(wrapedId).style.display = "none";
     }
 }
 
-var wrapcontent = function (obj) {
-    var objdisplay = document.getElementById(obj).style.display;
-    if (objdisplay === "none") {
-        document.getElementById(obj).style.display = "";
-    }
-    else {
-        document.getElementById(obj).style.display = "none";
-    }
+var showMsgHead = function (message, msgPoster) {
+    var
+        photo = "/headpic/" + msgPoster.profile_pic,
+        name = msgPoster.username,
+        post_time = new Date(message.createTime),
+        message_id = message.id;
+    post_time = post_time.getFullYear() + '-' + (post_time.getMonth() + 1) + "-" + post_time.getDay();
+    $("#msgid_" + message_id).append(msgHeadGenerator(photo, name, post_time));
 }
 
-var getOwner = function (pk, revertOwnerList) {
-    for (var i = 0; i < revertOwnerList.length; i++) {
-        if (pk === revertOwnerList[i].pk)
-            break;
-    }
-    return revertOwnerList[i].username;
+var showMsgContent = function (message) {
+    var
+        message_id = message.id,
+        content = message.content;
+    content = msgContentWrapper(message_id, content);
+    $("#msgid_" + message_id).append(msgContentGenerator(content));
 }
 
-var compare = function (x, y) {
-    if (x.parent_root > y.parent_root)
-        return true;
-    else if (x.parent_root === y.parent_root && x.revertTime > y.revertTime)
-        return true;
-    else
-        return false;
+var showMsgFoot = function (message, commentsList, thumbsList, msgPoster, thumbsUperList, commentsPosterList) {
+    $("#msgid_" + message.id).append(msgFootGenerator(message, commentsList, thumbsList, msgPoster, thumbsUperList, commentsPosterList));
 }
 
-var split = function (revertList) {
-    revertList.sort(compare);
-}
-
-
-function getdata() {
-    var news = $.ajax({
+function requestMessage() {
+    var messages = $.ajax({
         url: '/message/messagelist.do',
         data: {"now_sign": 0, "check_num": 10},
         type: "POST",
         dataType: "json",
         success: function (res) {
-            var id, title, author, createTime, content, zanNum, revertsNum;
-            var ownerlist, revertlist, news_id, content, parent_root, parent_id, revertTime, senderPk, receiverPk;
-            var html, newhtml;
-            res.forEach(function (value, index) {
-                id = value.message.id;
-                title = value.message.title;
-                author = value.messageOwner.username;
-                createTime = new Date(value.message.createTime);
-                createTime = createTime.getFullYear() + "-" + createTime.getMonth() + "-" + createTime.getDay();
-                content = value.message.content;
-                zanNum = value.message.zan_num;
-                revertsNum = value.zans.length;
-                html = $("#post-contain").html();
-                newhtml = gethtml(id, title, author, createTime, content, zanNum, revertsNum);
-                $("#post-contain").html(html + newhtml);
-                ownerlist = value.revertOwnerLists;
-                revertlist = value.reverts;
-                revertlist.sort(compare);
-                console.log(index + "\n");
-                revertlist.forEach(function (value2) {
-                    if (value2.parent_root === 0) {
-                        $("#" + value2.message_id + " div.post-reverts").html($("#" + value2.message_id + " div.post-reverts").html() + getrevert(value2.id, value2.parent_root, getOwner(value2.senderPK, ownerlist), "", value2.content));
-                        console.log(getOwner(value2.senderPK, ownerlist) + ":" + value2.content);
-                    }
-                    else {
-                        $("#reverts" + value2.revert_id).append(getrevert(value2.id, value2.parent_root, getOwner(value2.senderPK, ownerlist), getOwner(value2.receivePK, ownerlist), value2.content));
-                        console.log(value2.content + '\n');
-                    }
-                })
-            });
+            var message, commentsList, thumbsList;
+            var msgPoster, thumbsUperList, commentsPosterList;
+            res.forEach(function (element) {
+                message = element.message;
+                commentsList = element.reverts;
+                thumbsList = element.zans;
+                msgPoster = element.messageOwner;
+                thumbsUperList = element.zanOwnerLists;
+                commentsPosterList = element.revertOwnerLists;
+                msgGenerator(message.id);
+                showMsgHead(message, msgPoster);
+                showMsgContent(message);
+                showMsgFoot(message, commentsList, thumbsList, msgPoster, thumbsUperList, commentsPosterList);
+            })
         }
     });
 }
-
-
-
 
