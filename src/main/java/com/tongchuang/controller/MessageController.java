@@ -33,6 +33,7 @@ public class MessageController {
     //默认查询10条
     private static int default_check_num = 10;
 
+    //默认从第1条开始
     private static int default_now_sign = 0;
 
     @Setter
@@ -44,7 +45,7 @@ public class MessageController {
         String now_sign_str = request.getParameter("now_sign");
         int now_sign;
 
-        //未设置查询开始标志，则从1开始
+        //未设置查询开始标志，则从0开始
         if (now_sign_str == null) {
             now_sign = default_now_sign;
         } else {
