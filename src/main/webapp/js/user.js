@@ -6,13 +6,17 @@ function upLoadMsg() {
     var title = "";
     var content = $("#write-memo textarea").val();
     console.log($("#write-memo textarea").val());
-    var upLoad = $.ajax({
+    $.ajax({
         url: "/message/publishmessage.do",
-        data: {"pk": pk, "title": title, "content": content},
+        data: {
+            "pk": pk,
+            "title": title,
+            "content": content
+        },
         type: "POST",
-        dataType: "json",
-        contentType: 'application/json; charset=UTF-8',
+        dataType: "text",
         success: function (res) {
+            console.log(res);
             if (res === true)
                 window.location.reload()
         }

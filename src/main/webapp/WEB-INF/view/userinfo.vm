@@ -67,7 +67,7 @@
     <div class="col-md-8 rows" id="post-contain">
         <div id="memo-contain">
             <div id="write-memo">
-                <textarea class="form-control" rows="3">说点什么吧</textarea>
+                <textarea class="form-control" rows="3" placeholder="说点什么吧"></textarea>
             </div>
             <div id="memo-submit" class="panel panel-heading">
                 <button type="button" class="btn btn-info" onclick="upLoadMsg()">发表</button>

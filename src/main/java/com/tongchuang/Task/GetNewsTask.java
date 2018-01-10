@@ -33,6 +33,9 @@ public class GetNewsTask extends TimerTask {
     public void run() {
         System.out.println("the task is run @ " + new Date());
         ArrayList<NewsModel> newslist = newsPullResource.pullNews();
+        if(newslist == null){
+            return;
+        }
         for (NewsModel news : newslist) {
             newsDao.saveNews(news.getNews_id(), news.getTitle(), news.getSource(), news.getGmt_publish(), news.getUrl());
         }

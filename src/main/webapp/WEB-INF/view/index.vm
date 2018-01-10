@@ -10,7 +10,7 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
-<body>
+<body style="background-color: rgb(247, 247, 247)">
 <div class="container">
 
     <!-- Static navbar -->
@@ -27,13 +27,12 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav ">
-                    <li class="active"><a href="map.html">首页</a></li>
+                    <li class="active"><a href="index.html">首页</a></li>
                     <li><a href="news.html">新闻</a></li>
                     <li><a href="message.html">消息</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li ><a href="" data-toggle="modal" data-target="#mymodal">登录</a></li>
-                    <li><a href="" data-toggle="modal" data-target="#signinModel">注册</a></li>
+                    <li ><a href="user.html">username</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
@@ -44,64 +43,6 @@
     </div>
 
 
-</div>
-<div class="modal" id="mymodal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">请按提示输入</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-signin">
-                    <label  class="sr-only">学号</label>
-                    <input type="pk" id="userpk" name="userpk" class="form-control" placeholder="学号" required autofocus>
-                    <label class="sr-only">密码</label>
-                    <input type="password" id="userpassword" name="userpassword" class="form-control" placeholder="密码" required>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="remember-me"> 记住密码
-                        </label>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-lg btn-primary btn-block" type="submit" id="signup" data-dismiss="modal">登录</button>
-                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">保存</button> -->
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<div class="modal" id="signinModel">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <h4 class="modal-title">请按提示输入</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-modal">
-                    <label  class="sr-only">学号</label>
-                    <input type="pk" id="pk" name="pk" class="form-control" placeholder="学号" required autofocus>
-                    <label  class="sr-only">密码</label>
-                    <input type="password" id="password" name="password" class="form-control" placeholder="密码" required>
-                    <label  class="sr-only">重复密码</label>
-                    <input type="password" id="password2" name="password2" class="form-control" placeholder="重复密码" required>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" value="remember-me"> 记住密码
-                        </label>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-lg btn-primary btn-block" type="submit" id="signin" data-dismiss="modal">登录</button>
-                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">保存</button> -->
-            </div>
-        </div>
-    </div>
 </div>
 <script src="/js/indexCanvas.js"></script>
 <script src="/js/echarts.js"></script>

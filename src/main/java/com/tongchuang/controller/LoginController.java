@@ -23,11 +23,17 @@ public class LoginController {
     @Setter
     private LoginService loginService;
 
-//    private static final String PARAM_NULL_ERROR = "null_error";
-//
-//    private static final String LOGIN_FAIL = "user_error";
-//
-//    private static final String LOGIN_SUCCESS = "success";
+    private static final String LOGIN_FAIL = "user_error";
+
+    private static final String LOGIN_SUCCESS = "success";
+
+    private static final String EXIT_SUCCESS = "success";
+
+    @RequestMapping(value = "/getSession")
+    @ResponseBody
+    public UserSessionModel getSession(HttpServletRequest request, HttpServletResponse response){
+        return (UserSessionModel) request.getSession().getAttribute("userSession");
+    }
 
     @RequestMapping(value = "/login")
     public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
@@ -36,31 +42,16 @@ public class LoginController {
         return mav;
     }
 
-    @RequestMapping(value = "/index")
-    public ModelAndView index(HttpServletRequest request, HttpServletResponse response){
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("index");
-        return mav;
-    }
-
-    @RequestMapping(value = "/test")
-    public ModelAndView test(HttpServletRequest request, HttpServletResponse response) {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("test");
-        return mav;
-    }
-
     @RequestMapping(value = "/checklogin")
     @ResponseBody
-    public boolean checklogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public String checklogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String pk = request.getParameter("pk").trim();
         String password = request.getParameter("password");
 
         UserLoginModel userLoginModel = loginService.checkLoginValidity(pk,password);
 
         if(userLoginModel == null){
-            System.out.println("login fail");
-            return false;
+            return LOGIN_FAIL;
         }
 
         UserSessionModel userSessionModel = new UserSessionModel();
@@ -75,14 +66,14 @@ public class LoginController {
 
         request.getSession().setAttribute("userSession",userSessionModel);
 
-        System.out.println("login success");
-        return true;
+        return LOGIN_SUCCESS;
     }
 
     @RequestMapping(value = "/exit")
-    public void exit(HttpServletRequest request, HttpServletResponse response) throws Exception{
+    @ResponseBody
+    public String exit(HttpServletRequest request, HttpServletResponse response) throws Exception{
         request.getSession().removeAttribute("userSession");
-        response.sendRedirect("/userlogin/index.html");
+        return EXIT_SUCCESS;
     }
 
 }
