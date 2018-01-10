@@ -32,6 +32,11 @@ public class UserController {
 
     private static String[] allowPicSuffixes = {"jpg", "png", "jpeg"};
 
+    //默认查询10条
+    private static int DEFAULT_SIZE = 10;
+
+    private static int DEFAULT_INDEX = 0;
+
     //最大上传10M
     private static long maxUploadSize = 10485760;
 
@@ -70,7 +75,27 @@ public class UserController {
     @ResponseBody
     public ArrayList<MessageShowModel> showMessageListByUser(HttpServletRequest request, HttpServletResponse response) {
         String pk = request.getParameter("user_pk");
-        return messageService.getMessageByPK(pk);
+        String index_str = request.getParameter("index");
+        int index;
+        //未设置查询开始标志，则从1开始
+        if (index_str == null) {
+            index = DEFAULT_INDEX;
+        } else {
+            index = Integer.valueOf(index_str);
+        }
+        String check_num_str = request.getParameter("size");
+        int size;
+        //未设置查询条数，则默认为10条
+        if (check_num_str == null) {
+            size = DEFAULT_SIZE;
+        } else {
+            size = Integer.valueOf(check_num_str);
+        }
+        //禁止一次查询超过50条
+        if (size > 50) {
+            size = DEFAULT_SIZE;
+        }
+        return messageService.getMessageByPK(pk,index,size);
     }
 
     @RequestMapping(value = "/change_profile_pic")

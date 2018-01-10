@@ -30,6 +30,8 @@ public class MapController {
     @ResponseBody
     public ModelAndView index(){
         ModelAndView mav = new ModelAndView();
+        ArrayList<UserMapModel> userMapLists = mapService.loadUserMapData();
+        mav.addObject("userMapLists",userMapLists);
         mav.setViewName("index");
         return mav;
     }

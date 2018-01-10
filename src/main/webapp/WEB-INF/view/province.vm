@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
 
-    <title>安徽</title>
+    <title>省份信息</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -33,6 +33,8 @@
 <!-- NAVBAR
 ================================================== -->
 <body>
+
+    #parse("head.vm")
 
 
 <!-- Carousel

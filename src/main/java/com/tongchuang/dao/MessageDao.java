@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public interface MessageDao {
     ArrayList<MessageModel> getAllMessage(@Param("now_sign") int now_sign, @Param("check_num") int check_num);
 
-    ArrayList<MessageModel> getMessageByPK(@Param("owner_pk") String pk);
+    ArrayList<MessageModel> getMessageByPK(@Param("owner_pk") String pk,@Param("index") int index,@Param("size") int size);
 
     ArrayList<ZanModel> loadZanPksByMessageId(@Param("message_id") int message_id);
 

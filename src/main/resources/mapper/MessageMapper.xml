@@ -6,7 +6,7 @@
     </select>
 
     <select id="getMessageByPK" resultType="com.tongchuang.model.MessageModel">
-      select * from message where owner_pk = #{owner_pk} and isdelete = 0;
+      select * from message where owner_pk = #{owner_pk} and isdelete = 0 order by createTime desc limit #{index},#{size};
     </select>
 
     <select id="loadZanPksByMessageId" resultType="com.tongchuang.model.ZanModel">

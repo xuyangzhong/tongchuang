@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,6 +39,13 @@ public class MessageController {
 
     @Setter
     private MessageService messageService;
+
+    @RequestMapping(value = "/message")
+    public ModelAndView messageIndex(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("message");
+        return mav;
+    }
 
     @RequestMapping(value = "/messagelist")
     @ResponseBody

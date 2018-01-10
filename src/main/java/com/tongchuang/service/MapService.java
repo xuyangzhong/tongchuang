@@ -26,6 +26,7 @@ public class MapService {
         ArrayList<String> user_lists;
         ArrayList<UserMapModel> userMapLists = new ArrayList<UserMapModel>();
         for (ProvinceModel province : provinceLists) {
+            String usernames = "";
             UserMapModel userMapModel = new UserMapModel();
             userMapModel.setProvinceModel(province);
             provin_id = province.getProvin_id();
@@ -33,6 +34,13 @@ public class MapService {
             if (user_lists == null) {
                 user_lists = new ArrayList<String>();
             }
+            for (String username : user_lists) {
+                usernames += username;
+            }
+            if (usernames.length() != 0) {
+                usernames = usernames.substring(1);
+            }
+            userMapModel.setUsernames(usernames);
             userMapModel.setUser_lists(user_lists);
             userMapModel.setUser_num(user_lists.size());
             userMapLists.add(userMapModel);
@@ -45,13 +53,13 @@ public class MapService {
         return mapDao.loadProvinceDetailInfo(provin_id);
     }
 
-    public ArrayList<UserInfoModel> getProvinUserByProvinId(int provin_id){
+    public ArrayList<UserInfoModel> getProvinUserByProvinId(int provin_id) {
         ArrayList<UserInfoModel> users = new ArrayList<UserInfoModel>();
         ArrayList<String> pks = mapDao.loadPKsByProvinceId(provin_id);
-        if(pks == null){
+        if (pks == null) {
             return users;
         }
-        for(String pk : pks){
+        for (String pk : pks) {
             UserInfoModel user = userDao.loadUserInfo(pk);
             users.add(user);
         }

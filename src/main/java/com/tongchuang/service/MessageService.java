@@ -32,8 +32,8 @@ public class MessageService {
         return getRevertAndZanByMessageLists(messageLists);
     }
 
-    public ArrayList<MessageShowModel> getMessageByPK(String pk) {
-        ArrayList<MessageModel> messageLists = messageDao.getMessageByPK(pk);
+    public ArrayList<MessageShowModel> getMessageByPK(String pk,int index, int size) {
+        ArrayList<MessageModel> messageLists = messageDao.getMessageByPK(pk,index,size);
         return getRevertAndZanByMessageLists(messageLists);
     }
 
