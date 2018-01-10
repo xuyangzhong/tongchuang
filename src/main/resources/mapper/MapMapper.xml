@@ -11,6 +11,10 @@
     <select id="loadUsernamesByProvinceId" resultType="java.lang.String">
         select username from user_provin left join user_login on user_provin.pk = user_login.pk where provin_id=#{provin_id};
     </select>
+    
+    <select id="loadPKsByProvinceId" resultType="java.lang.String">
+        select pk from user_provin where provin_id = #{provin_id};
+    </select>
 
     <select id="loadProvinceDetailInfo" resultType="com.tongchuang.model.ProvinceDetailInfo">
         select province_detail.id,province_detail.provin_id,provin_name,introduce,scenic from province_detail left join province on province.provin_id = province_detail.provin_id where province_detail.provin_id=#{provin_id};

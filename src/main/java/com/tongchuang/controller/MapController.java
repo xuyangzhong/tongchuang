@@ -2,6 +2,7 @@ package com.tongchuang.controller;
 
 import com.tongchuang.model.ProvinceDetailInfo;
 import com.tongchuang.model.ProvinceImgUrlsModel;
+import com.tongchuang.model.UserInfoModel;
 import com.tongchuang.model.UserMapModel;
 import com.tongchuang.service.MapService;
 import lombok.Setter;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Controller
 @RequestMapping(value = "/map")
@@ -40,20 +42,44 @@ public class MapController {
     }
 
     @RequestMapping(value = "/provin_detail")
-    @ResponseBody
-    public ProvinceDetailInfo getProvinceDetailInfo(HttpServletRequest request, HttpServletResponse response){
+//    @ResponseBody
+    public ModelAndView getProvinceDetailInfo(HttpServletRequest request, HttpServletResponse response){
+        ModelAndView mav = new ModelAndView();
         int provin_id = Integer.valueOf(request.getParameter("provin_id"));
+
+        //该省份详细信息
         ProvinceDetailInfo provinceDetailInfo = mapService.getProvinDetailInfoByProvinId(provin_id);
-        return provinceDetailInfo;
+        mav.addObject("provinceDetailInfo",provinceDetailInfo);
+
+        //所在该省份同学
+        ArrayList<UserInfoModel> userlist = mapService.getProvinUserByProvinId(provin_id);
+        mav.addObject("userlist",userlist);
+
+        //该省份幻灯片
+//        ProvinceImgUrlsModel provinceImgUrls = mapService.getProvinceImgUrlsByProvinceId(provin_id);
+        //简单设置成所有省份都是相同三张图片
+        ProvinceImgUrlsModel provinceImgUrls = new ProvinceImgUrlsModel();
+        provinceImgUrls.setProvin_id(provin_id);
+        provinceImgUrls.setSlideImgNum(3);
+        ArrayList<String> imgUrls = new ArrayList<String>();
+        imgUrls.add("img_1_1.jpg");
+        imgUrls.add("img_1_2.jpg");
+        imgUrls.add("img_1_3.jpg");
+        provinceImgUrls.setSlideImgUrls(imgUrls);
+
+        mav.addObject("provinceImgUrls",provinceImgUrls);
+
+        mav.setViewName("test");
+        return mav;
     }
 
-    @RequestMapping(value = "/provin_imgs")
-    @ResponseBody
-    public ProvinceImgUrlsModel getProvinceImgs(HttpServletRequest request, HttpServletResponse response){
-        int provin_id = Integer.valueOf(request.getParameter("provin_id"));
-        ProvinceImgUrlsModel provinceImgUrlsModel = mapService.getProvinceImgUrlsByProvinceId(provin_id);
-        return provinceImgUrlsModel;
-    }
+//    @RequestMapping(value = "/provin_imgs")
+//    @ResponseBody
+//    public ProvinceImgUrlsModel getProvinceImgs(HttpServletRequest request, HttpServletResponse response){
+//        int provin_id = Integer.valueOf(request.getParameter("provin_id"));
+//        ProvinceImgUrlsModel provinceImgUrlsModel = mapService.getProvinceImgUrlsByProvinceId(provin_id);
+//        return provinceImgUrlsModel;
+//    }
 
     @RequestMapping(value = "/change_province_info")
     @ResponseBody

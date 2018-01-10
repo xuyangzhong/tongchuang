@@ -18,10 +18,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         String context = request.getContextPath();
         String url = requestUri.substring(context.length());
         log.info(String.format("requestUri : %s ;\ncontext : %s ;\nurl : %s ", requestUri, context, url));
-//        UserSessionModel userSession = (UserSessionModel) request.getSession().getAttribute("userSession");
-//        if (userSession == null) {
-//            response.sendRedirect("/userlogin/login.html");
-//        }
+        UserSessionModel userSession = (UserSessionModel) request.getSession().getAttribute("userSession");
+        if (userSession == null) {
+            response.sendRedirect("/login/login.html");
+        }
         return super.preHandle(request, response, handler);
     }
 }

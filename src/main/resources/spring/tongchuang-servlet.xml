@@ -46,7 +46,7 @@
         <!--数字函数名称-->
         <property name="numberToolAttribute" value="number"/>
 
-        <!--<property name="toolboxConfigLocation" value="classpath:velocity/toolbox.xml"/>-->
+        <property name="toolboxConfigLocation" value="/WEB-INF/classes/velocity/toolbox.xml"/>
 
         <property name="contentType" value="text/html;charset=UTF-8"/>
         <!--是否使用spring对宏定义的支持-->
@@ -63,7 +63,9 @@
         <mvc:interceptor>
             <!--需要拦截的地址-->
             <mvc:mapping path="/*/*.html"/>
+            <mvc:mapping path="/*/*.do" />
             <mvc:exclude-mapping path="/login/login.html"/>
+            <mvc:exclude-mapping path="/login/checklogin.do" />
             <bean class="com.tongchuang.interceptors.LoginInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>

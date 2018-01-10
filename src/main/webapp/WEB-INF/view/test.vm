@@ -3,10 +3,84 @@
 <head>
 </head>
 <body>
-<form name="Form" action="/user/change_profile_pic.do" method="post" enctype="multipart/form-data">
-    <h1>上传文件</h1>
-    <input type="file" name="file">
-    <input type="submit" value="upload"/>
-</form>
+<table>
+    <tr>
+        <td>Session中的用户PK</td>
+        <td>${userSession.pk}</td>
+    </tr>
+    <tr>
+        <td>Session中的用户username</td>
+        <td>${userSession.username}</td>
+    </tr>
+    <tr>
+        <td>Session中的用户loginTime</td>
+        <td>${userSession.loginTime}</td>
+    </tr>
+    <tr>
+        <td>Session中的用户PK</td>
+        <td>${userSession.power}</td>
+    </tr>
+    <tr>
+        <td>省份主键id</td>
+        <td>${provinceDetailInfo.id}
+    </tr>
+    <tr>
+        <td>省份provin_id</td>
+        <td>${provinceDetailInfo.provin_id}
+    </tr>
+    <tr>
+        <td>省份名</td>
+        <td>${provinceDetailInfo.provin_name}
+    </tr>
+    <tr>
+        <td>省份introduce</td>
+        <td>${provinceDetailInfo.introduce}
+    </tr>
+    <tr>
+        <td>省份scenic</td>
+        <td>${provinceDetailInfo.scenic}
+    </tr>
+    #foreach($user in $userlist){
+        <tr>
+            <table>
+                <title>省份第$velocityCount个人</title>
+                <tr>
+                    <td>pk</td>
+                    <td>${user.pk}</td>
+                </tr>
+                <tr>
+                    <td>username</td>
+                    <td>${user.username}</td>
+                </tr>
+                <tr>
+                    <td>profile_pic</td>
+                    <td>${user.profile_pic}</td>
+                </tr>
+                <tr>
+                    <td>introduce</td>
+                    <td>${user.introduce}</td>
+                </tr>
+                <tr>
+                    <td>industry</td>
+                    <td>${user.industry}</td>
+                </tr>
+            </table>
+        </tr>
+    #end
+    #foreach($pic_url in ${provinceImgUrls.slideImgUrls}){
+        <tr>
+            <table>
+                <title>第$velocityCount张幻灯片</title>
+                <tr>
+                    <td>url</td>
+                    <td>${pic_url}</td>
+                </tr>
+            </table>
+        </tr>
+    #end
+
+
+
+</table>
 </body>
 </html>

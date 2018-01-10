@@ -1,13 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<toolbox>
-    <tool>
-        <key>UrlUtil</key>
-        <class>com.nali.common.util.UrlUtil</class>
-        <scope>application</scope>
-    </tool>
-    <tool>
-        <key>VersionUtil</key>
-        <class>com.ximalaya.shop.api.domain.util.VersionUtil</class>
-        <scope>application</scope>
-    </tool>
-</toolbox>
+<tools>
+    <data type="string" key="version" value="2.0"/>
+    <toolbox scope="request">
+        <tool class="org.apache.velocity.tools.view.CookieTool"/>
+        <tool class="org.apache.velocity.tools.view.ImportTool"/>
+        <tool class="org.apache.velocity.tools.view.IncludeTool"/>
+        <tool class="org.apache.velocity.tools.view.LinkTool"/>
+        <tool class="org.apache.velocity.tools.view.PagerTool"/>
+        <tool class="org.apache.velocity.tools.view.ParameterTool"/>
+        <tool class="org.apache.velocity.tools.view.ViewContextTool"/>
+        <tool class="org.apache.velocity.tools.generic.ContextTool"/>
+        <tool class="org.apache.velocity.tools.generic.LoopTool"/>
+        <tool class="org.apache.velocity.tools.generic.RenderTool"/>
+    </toolbox>
+
+    <toolbox scope="session" createSession="false">
+        <tool class="org.apache.velocity.tools.view.BrowserTool"/>
+    </toolbox>
+
+    <toolbox scope="application">
+        <tool class="org.apache.velocity.tools.generic.AlternatorTool"/>
+        <tool class="org.apache.velocity.tools.generic.ClassTool"/>
+        <tool class="org.apache.velocity.tools.generic.ComparisonDateTool"/>
+        <tool class="org.apache.velocity.tools.generic.ConversionTool"/>
+        <tool class="org.apache.velocity.tools.generic.DisplayTool"/>
+        <tool class="org.apache.velocity.tools.generic.EscapeTool"/>
+        <tool class="org.apache.velocity.tools.generic.FieldTool"/>
+        <tool class="org.apache.velocity.tools.generic.MathTool"/>
+        <tool class="org.apache.velocity.tools.generic.NumberTool"/>
+        <tool class="org.apache.velocity.tools.generic.ResourceTool"/>
+        <tool class="org.apache.velocity.tools.generic.SortTool"/>
+        <tool class="org.apache.velocity.tools.generic.XmlTool"/>
+        <tool class="org.apache.velocity.tools.generic.ListTool"/>
+        <tool class="org.apache.velocity.tools.generic.DateTool"/>
+    </toolbox>
+</tools>

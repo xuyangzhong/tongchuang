@@ -1,6 +1,7 @@
 package com.tongchuang.service;
 
 import com.tongchuang.dao.MapDao;
+import com.tongchuang.dao.UserDao;
 import com.tongchuang.model.*;
 import lombok.Setter;
 import org.slf4j.Logger;
@@ -15,6 +16,9 @@ public class MapService {
 
     @Setter
     private MapDao mapDao;
+
+    @Setter
+    private UserDao userDao;
 
     public ArrayList<UserMapModel> loadUserMapData() {
         ArrayList<ProvinceModel> provinceLists = mapDao.loadProvinceRoughInfo();
@@ -39,6 +43,19 @@ public class MapService {
 
     public ProvinceDetailInfo getProvinDetailInfoByProvinId(int provin_id) {
         return mapDao.loadProvinceDetailInfo(provin_id);
+    }
+
+    public ArrayList<UserInfoModel> getProvinUserByProvinId(int provin_id){
+        ArrayList<UserInfoModel> users = new ArrayList<UserInfoModel>();
+        ArrayList<String> pks = mapDao.loadPKsByProvinceId(provin_id);
+        if(pks == null){
+            return users;
+        }
+        for(String pk : pks){
+            UserInfoModel user = userDao.loadUserInfo(pk);
+            users.add(user);
+        }
+        return users;
     }
 
     public ProvinceImgUrlsModel getProvinceImgUrlsByProvinceId(int provin_id) {
