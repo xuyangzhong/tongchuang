@@ -29,6 +29,11 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+    
+    <listener>
+        <display-name>定时获取新闻</display-name>
+        <listener-class>com.tongchuang.listener.GetNewsListener</listener-class>
+    </listener>
 
     <servlet>
         <servlet-name>action</servlet-name>

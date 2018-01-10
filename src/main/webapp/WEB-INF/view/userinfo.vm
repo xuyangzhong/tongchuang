@@ -18,8 +18,21 @@
     </tr>
     <tr>
         <td>sex</td>
+        <td>
+            #if(${userinfo.sex} == 1)
+                男
+            #else
+                女
+            #end
+        </td>
+    </tr>
+
+
+    <tr>
+        <td>sex</td>
         <td>${userinfo.sex}</td>
     </tr>
+    <input type="hidden" id="img_url" name="img_url">${userinfo.profile_pic}
     <tr>
         <td>power</td>
         <td>${userinfo.power}</td>

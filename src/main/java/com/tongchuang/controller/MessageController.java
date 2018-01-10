@@ -33,7 +33,7 @@ public class MessageController {
     //默认查询10条
     private static int default_check_num = 10;
 
-    private static int default_now_sign = 1;
+    private static int default_now_sign = 0;
 
     @Setter
     private MessageService messageService;
