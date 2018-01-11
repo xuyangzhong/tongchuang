@@ -80,7 +80,14 @@ var msgCommentsGenerator = function (commentsList, commentsPosterList) {
                 return (x.revertTime > y.revertTime) ? true : false;
             }
             else {
-                return (x.revert_id > y.revert_id) ? true : false;
+                if (x.revert_id > y.revert_id)
+                    return true;
+                else if (x.revert_id === y.revert_id) {
+                    return (x.revertTime > y.revertTime) ? true : false;
+                }
+                else {
+                    return false;
+                }
             }
         }
         else if (x.parent_root > y.parent_root) {
@@ -92,6 +99,7 @@ var msgCommentsGenerator = function (commentsList, commentsPosterList) {
     };
     var html = "<div class=\"comments-container\">";
     var commemtId, photo, sender_name, receiver_name, content, date;
+    commentsList.sort(compare);
     commentsList.sort(compare);
     commentsList.forEach(function (element, index) {
         console.log(element.content + "\n");
@@ -244,6 +252,7 @@ function requestSession() {
 
 function changeReplyId(obj) {
     var login_pk = session.pk + "";
+    $(obj).style.cssText = $(obj).css("background-color", "#e7e7e7");
     //var login_pk = "123";
     var id = $(obj).parent().parent().parent().attr("id") + "";
     id = id.substring(6);
@@ -266,9 +275,10 @@ function changeReplyId(obj) {
         if (login_pk === receive_pk) {
         }
         else {
+            var revert_id = $(obj).attr("id").substring(11);
             text.attr("data-receive-pk", receive_pk);
-            text.attr("data-reverts-id", "-1");
-            text.attr("data-parent-root", "0");
+            text.attr("data-reverts-id", revert_id);
+            text.attr("data-parent-root", "1");
         }
     }
 }
