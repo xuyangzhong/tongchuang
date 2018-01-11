@@ -160,7 +160,8 @@ var option = {
 };
 myChart.on('click', function (param) {
     console.log(param.data.name);
-    window.location.replace("province.html");
+    // window.location.href="/map/provin_detail.html?provin_name="+param.data.name;
+    window.location.href="/map/provin_detail.html?provin_name=北京";
 });
 myChart.setOption(option);
 

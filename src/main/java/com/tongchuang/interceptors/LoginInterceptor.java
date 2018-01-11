@@ -22,14 +22,24 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         System.out.println(String.format("requestUri : %s ;\ncontext : %s ;\nurl : %s ", requestUri, context, url));
         log.info(String.format("requestUri : %s ;\ncontext : %s ;\nurl : %s ", requestUri, context, url));
         UserSessionModel userSession = (UserSessionModel) request.getSession().getAttribute("userSession");
+        if("/".equals(url) && userSession ==null){
+            request.getRequestDispatcher("/login/login.html");
+            return super.preHandle(request, response, handler);
+        }
+        if("/".equals(url) && userSession !=null){
+            request.getRequestDispatcher("/map/mapindex.html");
+            return super.preHandle(request, response, handler);
+        }
         if(LOGIN_URL.equals(url) && userSession !=null){
             response.sendRedirect("/map/mapindex.html");
+            return super.preHandle(request, response, handler);
         }
         if(LOGIN_URL.equals(url) && userSession == null){
             return super.preHandle(request, response, handler);
         }
         if (userSession == null) {
             response.sendRedirect("/login/login.html");
+            return super.preHandle(request, response, handler);
         }
         return super.preHandle(request, response, handler);
     }

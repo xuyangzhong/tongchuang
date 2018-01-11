@@ -7,9 +7,9 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" href="/favicon.ico">
 
-    <title>省份信息</title>
+    <title>${provinceDetailInfo.provin_name}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -33,8 +33,7 @@
 <!-- NAVBAR
 ================================================== -->
 <body>
-
-    #parse("head.vm")
+#parse("head.vm")
 
 
 <!-- Carousel
@@ -48,31 +47,34 @@
     </ol>
     <div class="carousel-inner" role="listbox">
         <div class="item active">
-            <img class="first-slide" src="./img/1.jpg" alt="First slide">
+            <img class="first-slide" src="/img/${provinceImgUrls.slideImgUrls.get(0)}" alt="First slide">
             <div class="container">
                 <div class="carousel-caption">
-                    <h1>徽式建筑</h1>
-                    <p>式建筑是中国传统建筑最重要的流派之一，其源于东阳建筑，徽派建筑作为徽文化的重要组成部分，历来为中外建筑大师所推崇。并非特指安徽建筑，主要流行于徽州六县与严州大部以及周边徽语区（如安徽旌德、石台，江西浮梁、德兴等）。以砖、木、石为原料，以木构架为主。梁架多用料硕大，且注重装饰。还广泛采用砖、木、石雕，表现出高超的装饰艺术水平。</p>
+                    <h1>${provinceDetailInfo.provin_name}</h1>
+                    <p>${provinceDetailInfo.introduce}</p>
+##                    <p>式建筑是中国传统建筑最重要的流派之一，其源于东阳建筑，徽派建筑作为徽文化的重要组成部分，历来为中外建筑大师所推崇。并非特指安徽建筑，主要流行于徽州六县与严州大部以及周边徽语区（如安徽旌德、石台，江西浮梁、德兴等）。以砖、木、石为原料，以木构架为主。梁架多用料硕大，且注重装饰。还广泛采用砖、木、石雕，表现出高超的装饰艺术水平。</p>
                     <!-- <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p> -->
                 </div>
             </div>
         </div>
         <div class="item">
-            <img class="second-slide" src="./img/2.jpg" alt="Second slide">
+            <img class="second-slide" src="/img/${provinceImgUrls.slideImgUrls.get(1)}" alt="Second slide">
             <div class="container">
                 <div class="carousel-caption">
-                    <h1>黄山</h1>
-                    <p>黄山：世界文化与自然双重遗产，世界地质公园，国家AAAAA级旅游景区，国家级风景名胜区，全国文明风景旅游区示范点，中华十大名山，天下第一奇山。</p>
+                    <h1>省份介绍</h1>
+                    <p>${provinceDetailInfo.introduce}</p>
+##                    <p>黄山：世界文化与自然双重遗产，世界地质公园，国家AAAAA级旅游景区，国家级风景名胜区，全国文明风景旅游区示范点，中华十大名山，天下第一奇山。</p>
                     <!-- <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p> -->
                 </div>
             </div>
         </div>
         <div class="item">
-            <img class="third-slide" src="./img/3.jpg" alt="Third slide">
+            <img class="third-slide" src="/img/${provinceImgUrls.slideImgUrls.get(2)}" alt="Third slide">
             <div class="container">
                 <div class="carousel-caption">
-                    <h1>书香文化</h1>
-                    <p>体验徽州文化，探寻宣笔、宣纸、徽墨、歙砚文房四宝制作流程，体验徽州人文魅力，感受“敬亭诗山看不厌”之风光，领略诗人当年泼墨宣纸，挥洒山水之意。</p>
+                    <h1>省份介绍</h1>
+                    <p>${provinceDetailInfo.introduce}</p>
+##                    <p>体验徽州文化，探寻宣笔、宣纸、徽墨、歙砚文房四宝制作流程，体验徽州人文魅力，感受“敬亭诗山看不厌”之风光，领略诗人当年泼墨宣纸，挥洒山水之意。</p>
                     <!-- <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p> -->
                 </div>
             </div>
@@ -96,26 +98,43 @@
 <div class="container marketing">
 
     <!-- Three columns of text below the carousel -->
-    <div class="row">
+    #foreach($user in $userlist)
+        #if($velocityCount % 3 == 0)
+        <div class="row">
+        #end
         <div class="col-lg-4">
-            <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-            <h2>钟旭阳</h2>
-            <p>合肥工业大学优秀毕业生</p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-            <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-            <h2>马云</h2>
-            <p>马云，男，1964年9月10日生于浙江省杭州市，祖籍浙江省嵊州市（原嵊县）谷来镇， 阿里巴巴集团主要创始人，现担任阿里巴巴集团董事局主席、日本软银董事、大自然保护协会中国理事会主席兼全球董事会成员、华谊兄弟董事、生命科学突破奖基金会董事。</p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-            <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-            <h2>马化腾</h2>
-            <p>马化腾  ，男，1971年10月29日生于广东省汕头市潮南区。腾讯公司主要创办人之一，现担任腾讯公司控股董事会主席兼首席执行官；全国青联副主席。</p>
-            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-    </div><!-- /.row -->
+            <a href="/user/userinfo.html?pk=${user.pk}">
+                <img class="img-circle" src="/headpic/${user.profile_pic}" alt="Generic placeholder image" width="140" height="140">
+            </a>
+            <h2>${user.username}</h2>
+            <p>${user.introduce}</p>
+##            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div>
+        #if($velocityCount % 3 == 0)
+        </div>
+        #end
+    #end
+
+##    <div class="row">
+##        <div class="col-lg-4">
+##            <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+##            <h2>钟旭阳</h2>
+##            <p>合肥工业大学优秀毕业生</p>
+##            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+##        </div><!-- /.col-lg-4 -->
+##        <div class="col-lg-4">
+##            <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+##            <h2>马云</h2>
+##            <p>马云，男，1964年9月10日生于浙江省杭州市，祖籍浙江省嵊州市（原嵊县）谷来镇， 阿里巴巴集团主要创始人，现担任阿里巴巴集团董事局主席、日本软银董事、大自然保护协会中国理事会主席兼全球董事会成员、华谊兄弟董事、生命科学突破奖基金会董事。</p>
+##            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+##        </div><!-- /.col-lg-4 -->
+##        <div class="col-lg-4">
+##            <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
+##            <h2>马化腾</h2>
+##            <p>马化腾  ，男，1971年10月29日生于广东省汕头市潮南区。腾讯公司主要创办人之一，现担任腾讯公司控股董事会主席兼首席执行官；全国青联副主席。</p>
+##            <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+##        </div><!-- /.col-lg-4 -->
+##    </div><!-- /.row -->
 
 
     <!-- START THE FEATURETTES -->
@@ -123,13 +142,17 @@
     <hr class="featurette-divider">
 
     <div class="row featurette">
-        <div class="col-md-8">
-            <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        <div class="col-md-7">
+            <h2 class="featurette-heading">相关景点介绍</h2>
+            <p class="lead">${provinceDetailInfo.scenic}</p>
         </div>
+        <!--<div class="col-md-5">-->
+        <!--<img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">-->
+        <!--</div>-->
     </div>
 
     <hr class="featurette-divider">
+
     <!-- /END THE FEATURETTES -->
 
 

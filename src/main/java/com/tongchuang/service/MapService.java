@@ -49,8 +49,8 @@ public class MapService {
         return userMapLists;
     }
 
-    public ProvinceDetailInfo getProvinDetailInfoByProvinId(int provin_id) {
-        return mapDao.loadProvinceDetailInfo(provin_id);
+    public ProvinceDetailInfo getProvinDetailInfoByProvinId(String provin_name) {
+        return mapDao.loadProvinceDetailInfo(provin_name);
     }
 
     public ArrayList<UserInfoModel> getProvinUserByProvinId(int provin_id) {
