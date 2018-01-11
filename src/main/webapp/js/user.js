@@ -1,8 +1,21 @@
+var session;
+window.addEventListener("load", requestSession(), false);
 window.addEventListener("load", requestUserDetail(), false);
 
+function requestSession() {
+    $.ajax({
+        url: '/login/getSession.do',
+        type: "POST",
+        dataType: "text",
+        async: false,
+        success: function (res) {
+            session = JSON.parse(res);
+        }
+    });
+}
+
 function upLoadMsg() {
-    var pk = '<%=Session["pk"] %>';
-    pk = 123;
+    var pk = session.pk;
     var title = "";
     var content = $("#write-memo textarea").val();
     console.log($("#write-memo textarea").val());
@@ -24,8 +37,8 @@ function upLoadMsg() {
 }
 
 function requestUserDetail() {
-    var username = '<%=Session["username"] %>';
-    var pk = '<%=Session["pk"] %>';
+    var username = session.username;
+    var pk = session.pk;
     pk = 123;
     var photo, introduction, career;
     var userInfoDetail = $.ajax({

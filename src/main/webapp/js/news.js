@@ -1,3 +1,5 @@
+var session;
+window.addEventListener("load", requestSession(), false);
 window.addEventListener("load", requestMessage(), false);
 
 var getName = function (pk, list) {
@@ -58,12 +60,16 @@ var msgThumbsGenerator = function (thumbsList, thumbsUperList) {
             str = str + getName(thumbsList[i].owner_pk, thumbsUperList) + "觉得很赞";
         }
     }
-    return "<div class=\"thumbs-container\">" +
-        "<div style=\"display: inline\"><img src=\"/icon/zanall.png\" /></div>" +
-        "<div class = \"thumbs-list\">" +
-        str +
-        "</div>" +
-        "</div>";
+    if (thumbsList.length > 0) {
+        return "<div class=\"thumbs-container\">" +
+            "<div style=\"display: inline\"><img src=\"/icon/zanall.png\" /></div>" +
+            "<div class = \"thumbs-list\">" +
+            str +
+            "</div>" +
+            "</div>";
+    }
+    else
+        return "";
 }
 
 var msgCommentsGenerator = function (commentsList, commentsPosterList) {
@@ -85,17 +91,18 @@ var msgCommentsGenerator = function (commentsList, commentsPosterList) {
         }
     };
     var html = "<div class=\"comments-container\">";
-    var photo, sender_name, receiver_name, content, date;
+    var commemtId, photo, sender_name, receiver_name, content, date;
     commentsList.sort(compare);
     commentsList.forEach(function (element, index) {
         console.log(element.content + "\n");
         if (element.parent_root === 0) {
+            commemtId = element.id;
             photo = "/headpic/" + getPhoto(element.senderPK, commentsPosterList);
             sender_name = getName(element.senderPK, commentsPosterList);
             content = element.content;
             date = new Date(element.revertTime);
-            date = (date.getMonth() + 1) + "-" + date.getDay();
-            html = html + "<div class=\"comment parent\">" +
+            date = (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + ((date.getMinutes() > 10) ? ("" + date.getMinutes()) : ("0" + date.getMinutes()));
+            html = html + "<div class=\"comment parent\" id='comment_id_" + commemtId + "' onclick='changeReplyId(this)' data-receive-pk='" + element.receivePK + "' data-sender-pk='" + element.senderPK + "'>" +
                 "<div class=\"comment-poster-pto\">" +
                 "<img src=\"" + photo + "\"/>" +
                 "</div>" +
@@ -106,13 +113,14 @@ var msgCommentsGenerator = function (commentsList, commentsPosterList) {
                 "</div>";
         }
         else {
+            commemtId = element.id;
             photo = "/headpic/" + getPhoto(element.senderPK, commentsPosterList);
             sender_name = getName(element.senderPK, commentsPosterList);
             receiver_name = getName(element.receivePK, commentsPosterList);
             content = element.content;
             date = new Date(element.revertTime);
-            date = (date.getMonth() + 1) + "-" + date.getDay();
-            html = html + "<div class=\"comment child\">" +
+            date = (date.getMonth() + 1) + "-" + date.getDate() + " " + date.getHours() + ":" + ((date.getMinutes() > 10) ? ("" + date.getMinutes()) : ("0" + date.getMinutes()));
+            html = html + "<div class=\"comment child\" id='comment_id_" + commemtId + "' onclick='changeReplyId(this)'data-receive-pk='" + element.receivePK + "' data-sender-pk='" + element.senderPK + "' data-revert-id='" + element.revert_id + "'>" +
                 "<div class=\"comment-poster-pto\">" +
                 "<img src=\"" + photo + "\"/>" +
                 "</div>" +
@@ -132,6 +140,22 @@ var msgFootGenerator = function (message, commentsList, thumbsList, msgPoster, t
         msgWidgetsGenerator(message) +
         msgThumbsGenerator(thumbsList, thumbsUperList) +
         msgCommentsGenerator(commentsList, commentsPosterList) +
+        commentsSenderGenerator(message) +
+        "</div>";
+}
+
+var commentsSenderGenerator = function (message) {
+    var text_name = "text_id_" + message.id;
+    var sender_pk = session.pk;
+    var receive_pk = message.owner_pk;
+    var reply_btn_id = "reply_btn_id_" + message.id;
+    return "<div class=\"comments-sender input-group\">" +
+        "<span class=\"input-group-addon\">@</span>" +
+        "<span class=\"input-group-addon\">&nbsp;&nbsp;&nbsp;</span>" +
+        "<input type=\"text\" name=\"" + text_name + "\" class=\"form-control\" placeholder=\"评论\">" +
+        "<span class=\"input-group-btn\">" +
+        "<button class=\"btn btn-default\" id=\"" + reply_btn_id + "\" type=\"button\" data-sender-pk=\"" + sender_pk + "\" data-receive-pk=\"" + receive_pk + "\" data-parent-root=\"0\" data-reverts-id=\"-1\" onclick=\"sendComment('" + reply_btn_id + "')\">评论</button>" +
+        "</span>" +
         "</div>";
 }
 
@@ -165,7 +189,7 @@ var showMsgHead = function (message, msgPoster) {
         name = msgPoster.username,
         post_time = new Date(message.createTime),
         message_id = message.id;
-    post_time = post_time.getFullYear() + '-' + (post_time.getMonth() + 1) + "-" + post_time.getDay();
+    post_time = post_time.getFullYear() + '-' + (post_time.getMonth() + 1) + "-" + post_time.getDate() + " " + post_time.getHours() + ":" + ((post_time.getMinutes() > 10) ? ("" + post_time.getMinutes()) : ("0" + post_time.getMinutes()));
     $("#msgid_" + message_id).append(msgHeadGenerator(photo, name, post_time));
 }
 
@@ -204,5 +228,76 @@ function requestMessage() {
             })
         }
     });
+}
+
+function requestSession() {
+    $.ajax({
+        url: '/login/getSession.do',
+        type: "POST",
+        dataType: "text",
+        async: false,
+        success: function (res) {
+            session = JSON.parse(res);
+        }
+    });
+}
+
+function changeReplyId(obj) {
+    var login_pk = session.pk + "";
+    //var login_pk = "123";
+    var id = $(obj).parent().parent().parent().attr("id") + "";
+    id = id.substring(6);
+    var receive_pk = $(obj).attr("data-sender-pk") + "";
+    var input = $(obj).parent();
+    input = input.next();
+    input = input.children().next().next().next();
+    //var  input = $(obj).parent().next().childNodes;
+    var text = input.children();
+    if ($(obj).hasClass("child")) {
+        var revert_id = $(obj).attr("data-revert-id");
+        if (login_pk === receive_pk) {
+            receive_pk = $(obj).attr("data-receive-pk") + "";
+            text.attr("data-receive-pk", receive_pk);
+        }
+        text.attr("data-reverts-id", revert_id);
+        text.attr("data-parent-root", "1");
+    }
+    else {
+        if (login_pk === receive_pk) {
+        }
+        else {
+            text.attr("data-receive-pk", receive_pk);
+            text.attr("data-reverts-id", "-1");
+            text.attr("data-parent-root", "0");
+        }
+    }
+}
+
+function sendComment(obj) {
+    var id = obj.substring(13);//reply_btn_id_xxx
+    var replyContent = $("input:text[name='" + "text_id_" + id + "']").val();
+    var senderPK = $("#" + obj).attr("data-sender-pk") + "";
+    var receivePK = $("#" + obj).attr("data-receive-pk") + "";
+    var parent_root = $("#" + obj).attr("data-parent-root") + "";
+    var revert_id = $("#" + obj).attr("data-reverts-id") + "";
+    var data = {
+        "message_id": id,
+        "parent_root": parent_root,
+        "content": replyContent,
+        "revert_id": revert_id,
+        "senderPK": senderPK,
+        "receivePK": receivePK
+    };
+    console.log(data);
+    $.ajax({
+        url: '/message/doRevert.do',
+        data: data,
+        type: "POST",
+        dataType: "json",
+        success: function (res) {
+            if (res === true)
+                window.location.reload();
+        }
+    })
 }
 
