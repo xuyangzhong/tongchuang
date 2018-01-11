@@ -2,13 +2,15 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/map/mapindex.html">同窗</a>
+
+            <a class="pull-left" href="/map/mapindex.html"><img src="/icon/logo.png" width="50px" height="50px" style="border-radius: 50px"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav ">
@@ -17,8 +19,26 @@
                 <li><a href="/message/message.html">动态</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li ><a href="/user/userinfo.html?pk=${userSession.pk}">${userSession.username}</a></li>
+                <li><a href="/user/userinfo.html?pk=${userSession.pk}">${userSession.username}</a></li>
+                <li><a href="" onclick="exit()">退出</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div><!--/.container-fluid -->
 </nav>
+<script type="application/javascript">
+    function exit() {
+        $.ajax({
+            type: "post",
+            url: "/login/exit.do",
+            cache: false,
+            async: true,
+            data: {},
+
+            success: function (result) {
+                if (result == "success") {
+                    window.location.href = "/login/login.html";
+                }
+            }
+        })
+    }
+</script>

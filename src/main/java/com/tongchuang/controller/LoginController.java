@@ -37,6 +37,10 @@ public class LoginController {
 
     @RequestMapping(value = "/login")
     public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
+        if(request.getSession().getAttribute("userSession")!=null){
+            request.getRequestDispatcher("/map/mapindex.html");
+            return null;
+        }
         ModelAndView mav = new ModelAndView();
         mav.setViewName("login");
         return mav;

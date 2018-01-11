@@ -11,14 +11,23 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginInterceptor extends HandlerInterceptorAdapter {
     private static final Logger log = LoggerFactory.getLogger(LoginInterceptor.class);
 
+    private static final String LOGIN_URL = "/login/login.html";
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         log.info("login interceptor begin");
         String requestUri = request.getRequestURI();
         String context = request.getContextPath();
         String url = requestUri.substring(context.length());
+        System.out.println(String.format("requestUri : %s ;\ncontext : %s ;\nurl : %s ", requestUri, context, url));
         log.info(String.format("requestUri : %s ;\ncontext : %s ;\nurl : %s ", requestUri, context, url));
         UserSessionModel userSession = (UserSessionModel) request.getSession().getAttribute("userSession");
+        if(LOGIN_URL.equals(url) && userSession !=null){
+            response.sendRedirect("/map/mapindex.html");
+        }
+        if(LOGIN_URL.equals(url) && userSession == null){
+            return super.preHandle(request, response, handler);
+        }
         if (userSession == null) {
             response.sendRedirect("/login/login.html");
         }

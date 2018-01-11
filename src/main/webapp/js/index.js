@@ -1,5 +1,21 @@
 window.addEventListener("resize", resizeCanvas, false);
 
+function getSession(){
+    $.ajax({
+        url: '/login/getSession.do',
+        type: "POST",
+        async:false,
+        dataType: "json",
+        success: function (res) {
+            parse(res);
+        }
+    });
+}
+
+function parse(x){
+    console.log(x.pk);
+}
+
 function requestMapDetail() {
     var mapDetail = $.ajax({
         url: '/map/maplist.do',
@@ -35,7 +51,6 @@ function refreshData(key, data) {
     for (var time = 0; time < 34; time++) {
         if (option.series[0].data[time].name == key) {
             option.series[0].data[time].value = data;
-            console.log("option.series[0].data[time].name"+option.series[0].data[time].value)
             break ;
         }
     }
