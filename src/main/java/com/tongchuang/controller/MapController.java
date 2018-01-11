@@ -47,11 +47,15 @@ public class MapController {
 //    @ResponseBody
     public ModelAndView getProvinceDetailInfo(HttpServletRequest request, HttpServletResponse response){
         ModelAndView mav = new ModelAndView();
-        int provin_id = Integer.valueOf(request.getParameter("provin_id"));
+//        int provin_id = Integer.valueOf(request.getParameter("provin_id"));
+
+        String provin_name = request.getParameter("provin_name");
 
         //该省份详细信息
-        ProvinceDetailInfo provinceDetailInfo = mapService.getProvinDetailInfoByProvinId(provin_id);
+        ProvinceDetailInfo provinceDetailInfo = mapService.getProvinDetailInfoByProvinId(provin_name);
         mav.addObject("provinceDetailInfo",provinceDetailInfo);
+
+        int provin_id = provinceDetailInfo.getProvin_id();
 
         //所在该省份同学
         ArrayList<UserInfoModel> userlist = mapService.getProvinUserByProvinId(provin_id);
@@ -71,7 +75,7 @@ public class MapController {
 
         mav.addObject("provinceImgUrls",provinceImgUrls);
 
-        mav.setViewName("test");
+        mav.setViewName("province");
         return mav;
     }
 

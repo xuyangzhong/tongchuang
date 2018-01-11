@@ -12,7 +12,7 @@ public interface MapDao {
 
     ArrayList<String> loadUsernamesByProvinceId(@Param("provin_id") int provin_id);
 
-    ProvinceDetailInfo loadProvinceDetailInfo(@Param("provin_id")int provin_id);
+    ProvinceDetailInfo loadProvinceDetailInfo(@Param("provin_name")String provin_name);
 
     ArrayList<ProvinceImgModel> loadProvinceImgByProvinceId(@Param("provin_id") int provin_id) ;
 

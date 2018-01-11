@@ -49,7 +49,7 @@ public class UserController {
     @RequestMapping(value = "test")
     public ModelAndView test(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("/WEB-INF/view/upload.vm");
+        mav.setViewName("test");
         return mav;
     }
 
