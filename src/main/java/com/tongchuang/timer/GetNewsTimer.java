@@ -1,9 +1,10 @@
-package com.tongchuang.Timer;
+package com.tongchuang.timer;
 
-import com.tongchuang.Task.GetNewsTask;
+import com.tongchuang.task.GetNewsTask;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.ServletContextEvent;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -22,11 +23,11 @@ public class GetNewsTimer {
         GregorianCalendar gc = new GregorianCalendar();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
-//        try {
-//            date = sdf.parse("2018-01-10");
-//        }catch (ParseException e){
-//            e.printStackTrace();
-//        }
+        try {
+            date = sdf.parse("2018-01-10");
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
         gc.setTime(date);
         System.out.println(date);
         //每1000 * 60 * 60 * 24毫秒即每天0:00执行一次

@@ -1,6 +1,6 @@
 package com.tongchuang.listener;
 
-import com.tongchuang.Timer.GetNewsTimer;
+import com.tongchuang.timer.GetNewsTimer;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

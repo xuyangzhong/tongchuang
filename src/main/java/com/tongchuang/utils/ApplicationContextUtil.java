@@ -1,4 +1,4 @@
-package com.tongchuang.Utils;
+package com.tongchuang.utils;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

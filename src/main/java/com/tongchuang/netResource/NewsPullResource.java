@@ -2,7 +2,7 @@ package com.tongchuang.netResource;
 
 import com.google.gson.*;
 import com.google.gson.JsonParser;
-import com.tongchuang.Utils.MD5;
+import com.tongchuang.utils.MD5;
 import com.tongchuang.model.NewsModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

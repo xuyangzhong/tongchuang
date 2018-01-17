@@ -1,4 +1,4 @@
-package com.tongchuang.Utils;
+package com.tongchuang.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

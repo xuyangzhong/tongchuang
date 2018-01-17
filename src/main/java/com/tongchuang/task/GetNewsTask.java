@@ -1,6 +1,6 @@
-package com.tongchuang.Task;
+package com.tongchuang.task;
 
-import com.tongchuang.Utils.ApplicationContextUtil;
+import com.tongchuang.utils.ApplicationContextUtil;
 import com.tongchuang.dao.NewsDao;
 import com.tongchuang.model.NewsModel;
 import com.tongchuang.netResource.NewsPullResource;
