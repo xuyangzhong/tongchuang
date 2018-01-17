@@ -1,0 +1,135 @@
+body {
+    background-color: white;
+}
+
+.post {
+    background-color: white;
+    padding: 0 35px 35px 35px;
+    margin-bottom: 35px;
+    line-height: 1.334;
+    font-size: 15px !important;
+}
+
+.post-head {
+    margin-bottom: 12px;
+}
+
+.user-pto {
+    float: left;
+    margin-right: 10px;
+}
+
+.user-info {
+    padding-top: 5px;
+}
+
+.user-name {
+    font-size: 15px;
+    line-height: 20px;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.post-date {
+    font-size: 13px;
+}
+
+.user-pto img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+}
+
+.post-foot {
+    font-size: 13px;
+}
+
+.widgets-container {
+    padding-bottom: 10px;
+    border-width: 0 0 1px;
+    border-style: solid;
+    border-color: #ddedf0;
+    margin: 0 10px 10px 10px;
+}
+
+.widgets-container:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+}
+
+.widgets-container img {
+    width: 24px;
+    height: 24px;
+}
+
+.reply-button {
+    display: inline-block;
+    float: right;
+    margin-left: 55px;
+    cursor: pointer;
+}
+
+.thumb-up-button {
+    display: inline-block;
+    float: right;
+    margin-left: 55px;
+    cursor: pointer;
+}
+
+.views-count {
+    display: inline-block;
+    float: left;
+    margin-top: 4px;
+}
+
+.thumbs-container {
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.thumbs-container img {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.thumbs-list {
+    display: inline;
+    color: #157c8c;
+}
+
+.comments-container {
+    font-size: 13px;
+}
+
+.comment img {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+}
+
+.comment-poster-pto {
+    float: left;
+    margin-right: 5px;
+}
+
+.comment-sender-name {
+    color: #157c8c;
+    margin-right: 2px;
+}
+
+.comment-receiver-name {
+    color: #157c8c;
+    margin-right: 2px;
+}
+
+.comment-post-time {
+    position: relative;
+    top: -2px;
+}
+
+.comment.child {
+    margin-left: 30px;
+}

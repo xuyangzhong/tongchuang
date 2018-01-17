@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<form name="Form" action="/user/change_profile_pic.do" method="post" enctype="multipart/form-data">
+    <h1>上传文件</h1>
+    <input type="file" name="file">
+    <input type="submit" value="upload"/>
+</form>
+</body>
+</html>

@@ -1,0 +1,54 @@
+#user-info-head {
+    margin-bottom: 20px;
+}
+
+#user-info-head:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+}
+
+#user-info-head img {
+    width: 125px;
+    height: 125px;
+    float: left;
+    border: #ddd 3px solid;
+    padding: 3px;
+}
+
+#user-info-head div {
+    position: relative;
+    left: 20px;
+    top: 20px;
+}
+
+#user-info-name {
+    font-size: 20px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+    color: #157c8c;
+}
+
+#memo-contain {
+    width: 90%;
+    margin-left: 40px
+}
+
+#memo-submit button {
+    float: right;
+    margin-right: 20px;
+}
+
+#memo-submit:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+}
+
+#memo-contain:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+}

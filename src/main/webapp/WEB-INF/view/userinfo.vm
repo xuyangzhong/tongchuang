@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="favicon.ico">
+    <title>个人主页</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/news.css" rel="stylesheet">
+    <link href="/css/userinfo.css" rel="stylesheet">
+</head>
+<body>
+    #parse("head.vm")
+<div style="height:51px;margin-bottom:35px"></div>
+<div class="col-md-11">
+    <div class="col-md-3" id="userinfo-contain">
+        <div id="user-info-head">
+            <img src="/headpic/${userinfo.profile_pic}">
+            <div>
+                <p id="user-info-name">${userinfo.username}</p>
+                <p id="user-info-sex">
+                    #if(${userinfo.sex}==1)
+                        男
+                    #else
+                        女
+                    #end
+                </p>
+            </div>
+        </div>
+        <div class="list-group">
+            <div id="user-info-introduction">
+                <button type="button" class="list-group-item" id="user-info-btn" onclick="showUserIntroduction()">个人简介
+                </button>
+                <p class="list-group-item disabled" style="display: none">${userinfo.introduce}</p>
+            </div>
+            <div id="user-info-career">
+                <p class="list-group-item">职业：<span>${userinfo.industry}</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 rows" id="post-contain">
+        <div id="memo-contain">
+            <div id="write-memo">
+                <textarea class="form-control" rows="3" placeholder="说点什么吧"></textarea>
+            </div>
+            <div id="memo-submit" class="panel panel-heading">
+                <button type="button" class="btn btn-info" onclick="upLoadMsg()">发表</button>
+            </div>
+        </div>
+        <!-- show articles here -->
+    </div>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/news.js"></script>
+<script src="/js/user.js"></script>
+</body>
+</html>

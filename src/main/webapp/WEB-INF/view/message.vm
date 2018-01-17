@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="favicon.ico">
+    <title>校友分布</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/news.css" rel="stylesheet">
+
+</head>
+<body>
+
+#parse("head.vm")
+
+<!-- Main component for a primary marketing message or call to action -->
+<div style="height:51px;margin-bottom:35px"></div>
+<div class="col-md-2" style="float: left;"></div>
+<div class="col-md-8" id="post-contain">
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/echarts.js"></script>
+<script src="/js/news.js"></script>
+</body>
+</html>
